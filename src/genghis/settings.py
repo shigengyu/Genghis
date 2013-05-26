@@ -1,5 +1,4 @@
 # Django settings for genghis project.
-import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -127,6 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     'home',
+    'article',
+    'about',
 )
 
 # A sample logging configuration. The only tangible logging

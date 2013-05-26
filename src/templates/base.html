@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<title>{% block title %}Page Title{% endblock %}</title>
+<title>{% block title %}Univer's Blog{% endblock %}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="keywords" content="">
@@ -60,7 +60,9 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{% static 'img/favicon/favicon.png' %}">
+
 </head>
+
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
@@ -69,7 +71,7 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> </a>
 				<!-- Site name for smallar screens -->
-				<a href="/home" class="brand">{% block brand %}{% endblock %}</a>
+				<a href="/home" class="brand">{% block brand %}Please input brand{% endblock %}</a>
 
 				<!-- Navigation starts -->
 				<div class="nav-collapse collapse">
@@ -82,10 +84,8 @@
 
 							<ul class="dropdown-menu">
 								<li><a href="#">Profile</a></li>
-
 								<li><a href="#">Settings</a></li>
-
-								<li><a href="login.html">Logout</a></li>
+								<li><a href="/Logout">Logout</a></li>
 							</ul></li>
 					</ul>
 
@@ -216,61 +216,57 @@
 				<!--- Sidebar navigation -->
 				<!-- If the main navigation has sub navigation, then add the class "has_submenu" to "li" of main navigation. -->
 				<ul class="navi">
-					<!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
-					<li class="nred"><a href="index.html">Dashboard</a></li>
-
-					<!-- Menu with sub menu -->
-					<li class="has_submenu nlightblue"><a href="#"> <!-- Menu name with icon -->
-							Widgets <!-- Icon for dropdown -->
-					</a>
-
+				
+					<!--
+						Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color.
+						You need to use this in <li> tag.
+					-->
+					<li class="has_submenu nlightblue">
+						<a href="#">
+							<i class="icon-edit"></i>Technical Articles
+						</a>
 						<ul>
-							<li><a href="widgets1.html">Widgets #1</a></li>
+							<li><a href="/article">C#</a></li>
+							<li><a href="/article">Java</a></li>
+						</ul>
+					</li>
 
-							<li><a href="widgets2.html">Widgets #2</a></li>
-						</ul></li>
+					<li class="nviolet">
+						<a href="/photo">
+							<i class="icon-picture"></i>Photos 
+						</a>
+					</li>
 
 					<li class="ngreen"><a href="charts.html">Charts</a></li>
 
 					<li class="norange"><a href="ui.html">UI Elements</a></li>
 
 					<li class="has_submenu nviolet"><a href="#"> Pages #1</a>
-
 						<ul>
 							<li><a href="calendar.html">Calendar</a></li>
-
 							<li><a href="post.html">Make Post</a></li>
-
 							<li><a href="login.html">Login</a></li>
-
 							<li><a href="register.html">Register</a></li>
-
 							<li><a href="statement.html">Statement</a></li>
-
 							<li><a href="error-log.html">Error Log</a></li>
-
 							<li><a href="support.html">Support</a></li>
-						</ul></li>
+						</ul>
+					</li>
 
 					<li class="has_submenu nblue"><a href="#"> Pages #2</a>
-
 						<ul>
 							<li><a href="error.html">Error</a></li>
-
 							<li><a href="gallery.html">Gallery</a></li>
-
 							<li><a href="grid.html">Grid</a></li>
-
 							<li><a href="invoice.html">Invoice</a></li>
-
 							<li><a href="media.html">Media</a></li>
-
 							<li><a href="profile.html">Profile</a></li>
-						</ul></li>
+						</ul>
+					</li>
 
 					<li class="nred"><a href="forms.html">Forms</a></li>
 
-					<li class="nlightblue"><a href="tables.html">Tables</a></li>
+					<li class="nlightblue"><a href="/about/profile/">Profile</a></li>
 				</ul>
 
 				<!-- Date -->
@@ -294,8 +290,10 @@
 
 			<!-- Matter -->
 			<div class="matter">
-				<div class="container-fluid">
-					<div class="row-fluid">{% block content %}{% endblock %}</div>
+				<div class="container-fluid">					
+					{% block content %}
+						Please input content here
+					{% endblock %}
 				</div>
 			</div>
 
@@ -308,7 +306,7 @@
 
 
 	<!-- Scroll to top -->
-	<span class="totop"><a href="#"></a></span>
+	<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
 
 
 	<!-- JavaScript starts -->

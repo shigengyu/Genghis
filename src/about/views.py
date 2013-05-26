@@ -1,6 +1,7 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
 
-class HomeView(TemplateView):
+class AboutView(TemplateView):
     
-    template_name = "index.html"
+    template_name = "profile.html"
+    
