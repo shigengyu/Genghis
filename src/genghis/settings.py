@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     
     'home',
     'article',
+    'photo',
     'about',
 )
 

@@ -1,6 +1,6 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
 
-class AboutView(TemplateView):
-    template_name = "profile.html"
+class PhotoView(TemplateView):
+    template_name = 'photos.html'
     

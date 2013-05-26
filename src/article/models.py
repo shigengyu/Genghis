@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.base import Model
-
-# Create your models here.
+from django.db.models import permalink
 
 class ArticleTag(Model):
     id = models.AutoField(primary_key=True),
@@ -17,12 +16,16 @@ class Article(Model):
     subject = models.CharField(max_length = 256),
     content = models.TextField(),
     author = models.CharField(max_length = 50),
-    create_date_time = models.DateTimeField(),
-    update_date_time = models.DateTimeField(),
+    create_date_time = models.DateTimeField(auto_now_add = True),
+    update_date_time = models.DateTimeField(auto_now = True),
     tags = models.ManyToManyField(ArticleTag)
     
     def __unicode__(self):
         return self.subject
+
+    @permalink    
+    def get_absolute_url(self):
+        return ('article.detail', self.id)
 
 
 class ArticleComment(Model):
@@ -30,8 +33,13 @@ class ArticleComment(Model):
     article = models.ForeignKey(Article),
     subject = models.CharField(max_length = 256),
     content = models.TextField(),
-    create_date_time = models.DateTimeField(),
-    update_date_time = models.DateTimeField(),
+    create_date_time = models.DateTimeField(auto_now_add = True),
+    update_date_time = models.DateTimeField(auto_now = True),
     
     def __unicode__(self):
         return self.subject
+
+    @permalink    
+    def get_absolute_url(self):
+        return ('article.comment.detail', self.id)
+    

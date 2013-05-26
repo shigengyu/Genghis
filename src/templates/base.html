@@ -6,57 +6,17 @@
 
 <title>{% block title %}Univer's Blog{% endblock %}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="author" content="" />
 
-<!--  {% load staticfiles %}  -->
-
-<!-- Stylesheets -->
-<link href="{% static 'style/bootstrap.css' %}" rel="stylesheet" />
-
-<!-- Font awesome icon -->
-<link href="{% static 'style/font-awesome.css' %}" rel="stylesheet">
-
-<!-- jQuery UI -->
-<link href="{% static 'style/jquery-ui.css' %}" rel="stylesheet" />
-
-<!-- Calendar -->
-<link href="{% static 'style/fullcalendar.css' %}" rel="stylesheet " />
-
-<!-- prettyPhoto -->
-<link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet" />
-
-<!-- Star rating -->
-<link href="{% static 'style/rateit.css' %}" rel="stylesheet" />
-
-<!-- Date picker -->
-<link href="{% static 'style/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" />
-
-<!-- jQuery Gritter -->
-<link href="{% static 'style/jquery.gritter.css' %}" rel="stylesheet" />
-
-<!-- CLEditor -->
-<link href="{% static 'style/jquery.cleditor.css' %}" rel="stylesheet" />
-
-<!-- Bootstrap toggle -->
-<link href="{% static 'style/bootstrap-toggle-buttons.css' %}" rel="stylesheet" />
-
-<!-- Main stylesheet -->
-<link href="{% static 'style/style.css' %}" rel="stylesheet" />
-
-<!-- Widgets stylesheet -->
-<link href="{% static 'style/widgets.css' %}" rel="stylesheet" />
-
-<!-- Responsive style (from Bootstrap) -->
-<link href="{% static 'style/bootstrap-responsive.css' %}" rel="stylesheet">
-
+{% load staticfiles %}
+{% include "base_css.html" %}
 
 <!-- HTML5 Support for IE -->
 <!--[if lt IE 9]>
-  <script src="{% static 'js/html5shim.js' %}"></script>
-  <![endif]-->
-
+	<script src="{% static 'js/html5shim.js' %}"></script>
+<![endif]-->
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{% static 'img/favicon/favicon.png' %}">
@@ -71,15 +31,16 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> </a>
 				<!-- Site name for smallar screens -->
-				<a href="/home" class="brand">{% block brand %}Please input brand{% endblock %}</a>
+				<a href="/home" class="brand">{% block brand %}Univer' Blog{% endblock %}</a>
 
 				<!-- Navigation starts -->
 				<div class="nav-collapse collapse">
 					<!-- Links -->
 					<ul class="nav pull-right">
 						<li class="dropdown pull-right"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"><img src="{% static 'img/user.jpg' %}"
-								alt="" class="nav-user-pic"> Admin</a> <!-- Dropdown menu -->
+							class="dropdown-toggle" href="#"><img
+								src="{% static 'img/user.jpg' %}" alt="" class="nav-user-pic">
+								Admin</a> <!-- Dropdown menu -->
 
 
 							<ul class="dropdown-menu">
@@ -205,80 +166,7 @@
 
 	<!-- Main content starts -->
 	<div class="content">
-		<!-- Sidebar -->
-		<div class="sidebar">
-			<div class="sidebar-dropdown">
-				<a href="#">Navigation</a>
-			</div>
-
-			<div class="sidebar-inner">
-
-				<!--- Sidebar navigation -->
-				<!-- If the main navigation has sub navigation, then add the class "has_submenu" to "li" of main navigation. -->
-				<ul class="navi">
-				
-					<!--
-						Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color.
-						You need to use this in <li> tag.
-					-->
-					<li class="has_submenu nlightblue">
-						<a href="#">
-							<i class="icon-edit"></i>Technical Articles
-						</a>
-						<ul>
-							<li><a href="/article">C#</a></li>
-							<li><a href="/article">Java</a></li>
-						</ul>
-					</li>
-
-					<li class="nviolet">
-						<a href="/photo">
-							<i class="icon-picture"></i>Photos 
-						</a>
-					</li>
-
-					<li class="ngreen"><a href="charts.html">Charts</a></li>
-
-					<li class="norange"><a href="ui.html">UI Elements</a></li>
-
-					<li class="has_submenu nviolet"><a href="#"> Pages #1</a>
-						<ul>
-							<li><a href="calendar.html">Calendar</a></li>
-							<li><a href="post.html">Make Post</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="register.html">Register</a></li>
-							<li><a href="statement.html">Statement</a></li>
-							<li><a href="error-log.html">Error Log</a></li>
-							<li><a href="support.html">Support</a></li>
-						</ul>
-					</li>
-
-					<li class="has_submenu nblue"><a href="#"> Pages #2</a>
-						<ul>
-							<li><a href="error.html">Error</a></li>
-							<li><a href="gallery.html">Gallery</a></li>
-							<li><a href="grid.html">Grid</a></li>
-							<li><a href="invoice.html">Invoice</a></li>
-							<li><a href="media.html">Media</a></li>
-							<li><a href="profile.html">Profile</a></li>
-						</ul>
-					</li>
-
-					<li class="nred"><a href="forms.html">Forms</a></li>
-
-					<li class="nlightblue"><a href="/about/profile/">Profile</a></li>
-				</ul>
-
-				<!-- Date -->
-				<div class="sidebar-widget">
-					<div id="todaydate"></div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Sidebar ends -->
-
-
+		{% include "base_sidebar.html" %}
 
 		<!-- Main bar -->
 		<div class="mainbar">
@@ -290,11 +178,8 @@
 
 			<!-- Matter -->
 			<div class="matter">
-				<div class="container-fluid">					
-					{% block content %}
-						Please input content here
-					{% endblock %}
-				</div>
+				<div class="container-fluid">{% block content %} Please input
+					content here {% endblock %}</div>
 			</div>
 
 			<!-- Matter ends -->
@@ -308,59 +193,7 @@
 	<!-- Scroll to top -->
 	<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
 
-
-	<!-- JavaScript starts -->
-
-	<!-- jQuery -->
-	<script src="{% static 'js/jquery.js' %}"></script>
-
-	<!-- Bootstrap -->
-	<script src="{% static 'js/bootstrap.js' %}"></script>
-
-	<!-- jQuery UI -->
-	<script src="{% static 'js/jquery-ui-1.10.2.custom.min.js' %}"></script>
-
-	<!-- Full Google Calendar - Calendar -->
-	<script src="{% static 'js/fullcalendar.min.js' %}"></script>
-
-	<!-- RateIt - Star rating -->
-	<script src="{% static 'js/jquery.rateit.min.js' %}"></script>
-
-	<!-- prettyPhoto -->
-	<script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
-
-	<!-- jQuery Flot -->
-	<script src="{% static 'js/excanvas.min.js' %}"></script>
-	<script src="{% static 'js/jquery.flot.js' %}"></script>
-	<script src="{% static 'js/jquery.flot.resize.js' %}"></script>
-	<script src="{% static 'js/jquery.flot.pie.js' %}"></script>
-	<script src="{% static 'js/jquery.flot.stack.js' %}"></script>
-
-	<!-- jQuery Gritter -->
-	<script src="{% static 'js/jquery.gritter.min.js' %}"></script>
-
-	<!-- Sparklines -->
-	<script src="{% static 'js/sparklines.js' %}"></script>
-
-	<!-- CLEditor -->
-	<script src="{% static 'js/jquery.cleditor.min.js' %}"></script>
-
-	<!-- Date picker -->
-	<script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
-
-	<!-- Bootstrap Toggle -->
-	<script src="{% static 'js/jquery.toggle.buttons.js' %}"></script>
-
-	<!-- Filter for support page -->
-	<script src="{% static 'js/filter.js' %}"></script>
-
-	<!-- Custom codes -->
-	<script src="{% static 'js/custom.js' %}"></script>
-
-	<!-- Custom chart codes -->
-	<script src="{% static 'js/charts.js' %}"></script>
-
-	<!-- JavaScript ends-->
+	{% include "base_js.html" %}
 </body>
 </html>
 
