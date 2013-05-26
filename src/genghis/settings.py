@@ -89,7 +89,6 @@ SECRET_KEY = '16tw1uct3-*sld%8mmlf(ku67+k2(r*k@=b-e+wm6m#+sf-4cb'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,6 +110,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    # "E:/Projects/GitHub/Genghis/src/templates/home"
 )
 
 INSTALLED_APPS = (

@@ -1,5 +1,7 @@
 # Create your views here.
-from django.http.response import HttpResponse
+from datetime import datetime
+from django.shortcuts import render
 
 def index(request):
-    return HttpResponse('Index')
+    now = datetime.now()
+    return render(request, 'index.htm', {'current_date': now})
