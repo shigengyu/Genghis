@@ -5,3 +5,6 @@ from django.shortcuts import render
 def index(request):
     now = datetime.now()
     return render(request, 'index.html', {'current_date': now})
+
+def about(request):
+    return render(request, 'about.html')
