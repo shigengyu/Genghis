@@ -1017,6 +1017,12 @@ form label{
 
 /* Widget colors */
 
+.widget.wgray .widget-head{
+  background-color: #555;
+  border: 1px solid #ddd;
+  color: #fff;
+}
+
 .widget.wred .widget-head{
   background-color: #fa3031;
   border: 1px solid #fa3031;
