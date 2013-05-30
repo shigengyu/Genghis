@@ -1,18 +1,14 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from article.models import Article
+from django.views.generic.edit import CreateView
+from article.forms import ArticleForm
 
 class ArticleView(TemplateView):
-    template_name = 'articles.html';
+    template_name = 'articles.html'
 
 class ArticleCreate(CreateView):
-    model = Article
-    
-class ArticleUpdate(UpdateView):
-    model = Article
-    fields = ['subject', 'content']
+    template_name = 'article_form.html';
+    form_class = ArticleForm    
 
-class ArticleDelete(DeleteView):
-    model = Article
-    success_url = '/article'
+class ArticleUpdate(TemplateView):
+    template_name = 'article_edit.html'

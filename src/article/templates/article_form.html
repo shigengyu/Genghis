@@ -17,8 +17,8 @@
 			<div class="widget-content">
 				<div class="padd">
 
-					<!-- Form starts.  -->
-					<form class="form-horizontal" action="/article/create/" method="post">
+					<form class="form-horizontal" action="/article/create/"
+						method="post">
 
 						<h6>Contents</h6>
 						<hr />
@@ -27,26 +27,18 @@
 						<div class="control-group">
 							<label class="control-label" for="subject">Subject</label>
 							<div class="controls">
-								<input type="text" id="subject" class="span11">
+								{{ form.subject }}
 							</div>
 						</div>
 						
-						{% if no_subject %}
-						<div class="control-group warning">
-							<div class="controls">
-								<span class="help-inline">Please input subject</span>
-							</div>
-						</div>
-						{% endif %}
-						
-
 						<!-- Content -->
 						<div class="control-group">
 							<label class="control-label" for="content">Content</label>
 							<div class="controls">
-								<textarea id="content" class="span11" rows="10"></textarea>
+								{{ form.content }}
 							</div>
 						</div>
+
 
 						<h6>Attachments</h6>
 						<hr />
@@ -60,9 +52,7 @@
 						{% csrf_token %}
 						<button type="submit" class="btn btn-info">Save</button>
 						<button type="submit" class="btn btn-warning">Submit</button>
-
 					</form>
-
 				</div>
 			</div>
 			<div class="widget-foot">
