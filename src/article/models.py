@@ -15,8 +15,8 @@ class Article(Model):
     subject = models.CharField(max_length=256)
     content = models.TextField()
     author = models.CharField(max_length=50)
-    create_date_time = models.DateTimeField(auto_now_add=True)
-    update_date_time = models.DateTimeField(auto_now=True)
+    create_date_time = models.DateTimeField()
+    update_date_time = models.DateTimeField()
     tags = models.ManyToManyField(ArticleTag)
     
     def __unicode__(self):

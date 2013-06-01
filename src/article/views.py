@@ -1,4 +1,4 @@
-# Create your views here.
+from datetime import datetime
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from article.forms import ArticleForm
@@ -20,6 +20,9 @@ class ArticleCreate(CreateView):
     
     def form_valid(self, form):
         data = form.save(commit=False)
+        current_time = datetime.now()
+        data.create_date_time = current_time
+        data.update_date_time = current_time
         data.author = 'Univer'
         data.save()
         return super(ArticleCreate, self).form_valid(form)

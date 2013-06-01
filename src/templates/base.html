@@ -10,7 +10,9 @@
 <meta name="keywords" content="" />
 <meta name="author" content="" />
 
-{% load staticfiles %} {% include "base_css.html" %}
+{% load staticfiles %}
+{% include "base_css.html" %}
+{% include "base_js.html" %}
 
 <!-- HTML5 Support for IE -->
 <!--[if lt IE 9]>
@@ -23,6 +25,7 @@
 </head>
 
 <body>
+
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
 			<div class="container">
@@ -30,8 +33,13 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> </a>
 				<!-- Site name for smallar screens -->
-				<a href="/home" class="brand">{% block brand %}Univer' Blog{% endblock %}</a>
+				<a href="/home" class="brand">
+					{% block brand %}Univer' Blog{%endblock %}
+				</a>
 				
+				<div class="login">
+					{% include "facebook_login.html" %}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -59,8 +67,7 @@
 
 			<!-- Matter -->
 			<div class="matter">
-				<div class="container-fluid">
-					{% block content %}{% endblock %}
+				<div class="container-fluid">{% block content %}{% endblock %}
 				</div>
 			</div>
 			<!-- Matter ends -->
@@ -72,7 +79,7 @@
 
 	<!-- Scroll to top -->
 	<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
-	{% include "base_js.html" %}
+
 </body>
 </html>
 
