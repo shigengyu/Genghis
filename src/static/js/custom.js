@@ -259,7 +259,8 @@ $(document).ready(function(){
 
 /* jQuery Notification (Gritter) */
 
-  
+$(document).ready(function(){
+
   /* On click notification. Refer ui.html file */
 
   /* Regulat notification */
