@@ -22,10 +22,6 @@ class Article(Model):
     def __unicode__(self):
         return self.subject
 
-    @permalink    
-    def get_absolute_url(self):
-        return ('article.detail', self.id)
-
 class ArticleForm(Form):
     class Meta:
         model = Article
