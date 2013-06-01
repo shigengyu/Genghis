@@ -5,7 +5,7 @@ from django.forms.widgets import TextInput, Textarea
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ('__all__',)
+        fields = ('subject', 'content', 'author', 'tags')
         widgets = {
             'subject': TextInput(attrs={'class':'span11'}),
             'content': Textarea(attrs={'class':'span11', 'rows': '10'}),

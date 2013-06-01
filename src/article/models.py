@@ -4,7 +4,7 @@ from django.db.models import permalink
 from django.forms.forms import Form
 
 class ArticleTag(Model):
-    name = models.CharField(max_length=20),
+    name = models.CharField(max_length=20)
     display_name = models.CharField(max_length=50)
     
     def __unicode__(self):
@@ -12,11 +12,11 @@ class ArticleTag(Model):
 
 
 class Article(Model):
-    subject = models.CharField(max_length=256, name='subject'),
-    content = models.TextField(name='content'),
-    author = models.CharField(max_length=50),
-    create_date_time = models.DateTimeField(auto_now_add=True),
-    update_date_time = models.DateTimeField(auto_now=True),
+    subject = models.CharField(max_length=256)
+    content = models.TextField()
+    author = models.CharField(max_length=50)
+    create_date_time = models.DateTimeField(auto_now_add=True)
+    update_date_time = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(ArticleTag)
     
     def __unicode__(self):

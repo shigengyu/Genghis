@@ -8,7 +8,7 @@ class ArticleView(TemplateView):
 
 class ArticleCreate(CreateView):
     template_name = 'article_form.html';
-    form_class = ArticleForm    
+    form_class = ArticleForm
 
 class ArticleUpdate(TemplateView):
     template_name = 'article_edit.html'
