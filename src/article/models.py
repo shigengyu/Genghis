@@ -27,17 +27,12 @@ class ArticleForm(Form):
         model = Article
 
 class ArticleComment(Model):
-    id = models.AutoField(primary_key=True),
-    article = models.ForeignKey(Article),
-    subject = models.CharField(max_length=256),
-    content = models.TextField(),
-    create_date_time = models.DateTimeField(auto_now_add=True),
-    update_date_time = models.DateTimeField(auto_now=True),
+    id = models.AutoField(primary_key=True)
+    article = models.ForeignKey(Article)
+    subject = models.CharField(max_length=256)
+    content = models.TextField()
+    create_date_time = models.DateTimeField(auto_now_add=True)
+    update_date_time = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
         return self.subject
-
-    @permalink    
-    def get_absolute_url(self):
-        return ('article.comment.detail', self.id)
-    

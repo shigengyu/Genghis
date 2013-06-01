@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block head %}
+<h2 class="pull-left">
+	Articles <span class="page-meta">Articles</span>
+</h2>
+{% endblock %} {% block content %}
+<div class="row-fluid">
+	<div class="span9">
+
+		{% for article in articles %}
+
+		<!-- Widget -->
+		<div class="widget">
+			<!-- Widget head -->
+			<div class="widget-head">
+				<div class="pull-left">{{ article.subject }}</div>
+				<div class="widget-icons pull-right">
+					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+				</div>
+			</div>
+
+			<!-- Widget content -->
+			<div class="widget-content">
+				<div class="padd">
+					{{ article.content }}
+				</div>
+			</div>
+			<div class="widget-foot">
+				{% if article.create_date_time  %}
+					Posted by {{article.author }} on {{ article.create_date_time }}
+				{% endif %}
+				{% if article.update_date_time != article.create_date_time %}
+					&nbsp;&nbsp;Last updated on {{ article.update_date_time }}
+				{% endif %}
+				<!-- Widget ends -->
+			</div>
+		</div>
+		
+		{% endfor %}
+	</div>
+
+	<div class="span3">
+		<div class="widget worange">
+			<div class="widget-head">
+				<div class="pull-left">Tags</div>
+				<div class="widget-icons pull-right">
+					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> <a
+						href="#" class="wclose"><i class="icon-remove"></i></a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="widget-content">
+				<div class="padd"></div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
