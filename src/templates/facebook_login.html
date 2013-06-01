@@ -1,4 +1,3 @@
-<div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
   FB.init({
@@ -19,8 +18,26 @@
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
-      var profilePicture = 'https://graph.facebook.com/' + response.authResponse.userID + '/picture';
-      $('#facebook-login').attr('src', profilePicture);
+      
+      var profileUrl = 'http://graph.facebook.com/' + response.authResponse.userID;
+      var profilePicture = profileUrl + '/picture';
+      $('#facebook-icon').attr('src', profilePicture);
+      $('#facebook-label').text('Facebook Logged In');
+      
+      var unique_id = $.gritter.add({
+          // (string | mandatory) the heading of the notification
+          title: 'Logged in using Facebook',
+          // (string | mandatory) the text inside the notification
+          text: '',
+          // (string | optional) the image to display on the left
+          image: profilePicture,
+          // (bool | optional) if you want it to fade out on its own or just sit there
+          sticky: false,
+          // (int | optional) the time you want it to be alive for before fading out
+          time: '',
+          // (string | optional) the class name you want to apply to that specific message
+          class_name: 'gritter-custom'
+      });
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 
@@ -61,11 +78,16 @@
   Learn more about options for the login button plugin:
   /docs/reference/plugins/login/ -->
 
-<a href="#"><img id="facebook-login" src="/static/img/facebook.png"></img></a>
+<a href="#">
+	<span id="facebook">
+		<img id="facebook-icon" src="/static/img/facebook.png" />
+		<span id="facebook-label">Facebook</span>
+	</span>
+</a>
 
 <script>
   $().ready(function() {
-  	$('#facebook-login').click(function() {
+  	$('#facebook').click(function() {
   		FB.login();
   	});
   });
