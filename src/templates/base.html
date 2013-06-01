@@ -12,7 +12,6 @@
 
 {% load staticfiles %}
 {% include "base_css.html" %}
-{% include "base_js.html" %}
 
 <!-- HTML5 Support for IE -->
 <!--[if lt IE 9]>
@@ -36,7 +35,7 @@
 				<a href="/home" class="brand"> {% block brand %} Univer' Blog {%endblock %} </a>
 
 				<!-- Links -->
-				<ul class="nav pull-right">
+				<ul class="nav pull-right">				
 					<li class="dropdown pull-right">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							Login <b class="caret"></b>
@@ -44,9 +43,28 @@
 						
 						<!-- Dropdown menu -->
 						<ul class="dropdown-menu">
-							<li>{% include "facebook_login.html" %}</li>
-							<li><a href="#"><i class="icon-cogs"></i> Settings</a></li>
-							<li><a href=""><i class="icon-off"></i> Logout</a></li>
+							<li>
+								<a href="{% url 'socialauth_begin' 'google' %}">
+									<span>
+										<img class="login-icon" src="/static/img/google.png" />Google
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'socialauth_begin' 'facebook' %}">
+									<span>
+										<img class="login-icon" src="/static/img/facebook.png" />Facebook
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'socialauth_begin' 'linkedin' %}">
+									<span>
+										<img class="login-icon" src="/static/img/linkedin.png" />LinkedIn
+									</span>
+								</a>
+							</li>
+							<li><a href=""><i class="icon-off"></i>Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -90,6 +108,7 @@
 	<!-- Scroll to top -->
 	<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
 
+	{% include "base_js.html" %}
 </body>
 </html>
 

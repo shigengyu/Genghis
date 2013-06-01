@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^photo/', include('photo.urls')),
     url(r'^about/', include('about.urls')),
     url(r'^profile/', include('about.urls')),
-    url(r'socialauth_linkedin/', include('social_auth.urls')),
+    url(r'^socialauth/', include('social_auth.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

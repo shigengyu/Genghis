@@ -169,3 +169,18 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.live.LiveBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+FACEBOOK_APP_ID              = '592973724070224'
+FACEBOOK_API_SECRET          = 'c3444c0aee28b1621934f65ce4d83ee3'
+LINKEDIN_CONSUMER_KEY        = 'r4nwqges9hsj'
+LINKEDIN_CONSUMER_SECRET     = 'rXpDiwOJVQYdrkjf'
+GOOGLE_CONSUMER_KEY          = '443446738252.apps.googleusercontent.com'
+GOOGLE_CONSUMER_SECRET       = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
+
+
+LOGIN_URL          = '/home/login-form/'
+LOGIN_REDIRECT_URL = '/home/logged-in/'
+LOGIN_ERROR_URL    = '/home/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
