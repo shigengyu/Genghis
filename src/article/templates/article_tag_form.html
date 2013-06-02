@@ -21,7 +21,7 @@
 			<div class="widget-content">
 				<div class="padd">
 
-					<form class="form-horizontal" action="/article/tag/create/"
+					<form class="form-horizontal" action="/article/tag/{{ action }}/"
 						method="post">
 						
 						<h6>Contents</h6>
@@ -42,6 +42,7 @@
 
 						{% csrf_token %}
 						<button type="submit" class="btn btn-info">Save</button>
+						<button type="button" class="btn btn-warning cancel">Cancel</button>
 					</form>
 				</div>
 			</div>
@@ -53,4 +54,17 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+	$().ready(function() {
+		$('.cancel').each(function(index, element) {
+			var url = '/article/tag/';
+			$(this).click(function() {
+				location.href = url;
+			});
+		});
+	});
+</script>
 {% endblock %}

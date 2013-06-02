@@ -56,6 +56,7 @@ class ArticleTagCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleTagCreate, self).get_context_data(**kwargs)
+        context['action'] = 'create'
         context['path'] = (PathItem('/article', 'Article'), PathItem('/article/tag', 'Tags'), PathItem('/article/tag/create', 'Create Tag'))
         return context
 
@@ -63,3 +64,21 @@ class ArticleTagCreate(CreateView):
         data = form.save(commit=False)
         data.save()
         return super(ArticleTagCreate, self).form_valid(form)
+
+class ArticleTagUpdate(UpdateView):
+    template_name = 'article_tag_form.html'
+    form_class = ArticleTagForm
+    success_url = '/article/tag'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ArticleTagUpdate, self).get_context_data(**kwargs)
+        context['action'] = 'update/' + kwargs.get('pk')
+        context['path'] = (PathItem('/article', 'Article'), PathItem('/article/tag', 'Tags'), PathItem('/article/tag/update', 'Update Tag'))
+        return context
+    
+    def get_queryset(self):
+        queryset =  ArticleTag.objects.all()
+        return queryset
+
+    def form_valid(self, form):
+        return super(ArticleTagUpdate, self).form_valid(form)

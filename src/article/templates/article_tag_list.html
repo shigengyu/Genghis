@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="row-fluid">
-	<table class="table table-bordered ">
+	<table id="tags" class="table table-bordered">
 		<tr>
 			<th class="span1"><center>ID</center></th>
 			<th class="span3">Name</th>
@@ -21,8 +21,8 @@
 			<td>{{ tag.name }}</td>
 			<td>{{ tag.display_name }}</td>
 			<td>
-				<button class="btn btn-warning">Rename</button>
-				<button class="btn btn-danger">Delete</button>
+				<button class="btn btn-warning update">Update</button>
+				<button class="btn btn-danger delete">Delete</button>
 			</td>
 		</tr>
 		{% endfor %}
@@ -31,4 +31,26 @@
 	<hr />
 	<button class="btn btn-info">Create</button>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+	$().ready(function() {
+		$('.update').each(function(index, element) {
+			var id = $(this).parent().siblings().get(0).innerHTML;
+			var url = '/article/tag/update/' + id;
+			$(this).click(function() {
+				location.href = url;
+			});
+		});
+		
+		$('.delete').each(function(index, element) {
+			var id = $(this).parent().siblings().get(0).innerHTML;
+			var url = '/article/tag/delete/' + id;
+			$(this).click(function() {
+				location.href = url;
+			});
+		});
+	});
+</script>
 {% endblock %}
