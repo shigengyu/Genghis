@@ -1,9 +1,10 @@
 from datetime import datetime
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
-from article.forms import ArticleForm
 from django.http.response import HttpResponseRedirect
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.decorators import login_required
 from article.models import Article
+from article.forms import ArticleForm
 
 class ArticleView(TemplateView):
     template_name = 'article_list.html'
@@ -27,5 +28,6 @@ class ArticleCreate(CreateView):
         data.save()
         return super(ArticleCreate, self).form_valid(form)
         
-class ArticleUpdate(TemplateView):
-    template_name = 'article_edit.html'
+class ArticleUpdate(UpdateView):
+    template_name = 'article_form.html'
+

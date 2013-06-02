@@ -1,5 +1,7 @@
 # Django settings for genghis project.
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as DEFAULT_TEMPLATE_CONTEXT_PROCESSORS
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,13 +13,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'E:\Projects\GitHub\Genghis\src\sqlite.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'E:\Projects\GitHub\Genghis\src\sqlite.db',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'univer',
         'PASSWORD': 'steroids',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',  # Set to empty string for default.
     }
 }
 
@@ -98,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'genghis.urls'
@@ -117,11 +119,11 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    #'django.contrib.admindocs',
+    # 'django.contrib.admindocs',
     
     'home',
     'article',
@@ -160,6 +162,11 @@ LOGGING = {
     }
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)
+
+
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
     'social_auth.backends.google.GoogleOAuthBackend',
@@ -170,17 +177,17 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-FACEBOOK_APP_ID              = '592973724070224'
-FACEBOOK_API_SECRET          = 'c3444c0aee28b1621934f65ce4d83ee3'
-LINKEDIN_CONSUMER_KEY        = 'r4nwqges9hsj'
-LINKEDIN_CONSUMER_SECRET     = 'rXpDiwOJVQYdrkjf'
-GOOGLE_CONSUMER_KEY          = '443446738252.apps.googleusercontent.com'
-GOOGLE_CONSUMER_SECRET       = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
+FACEBOOK_APP_ID = '592973724070224'
+FACEBOOK_API_SECRET = 'c3444c0aee28b1621934f65ce4d83ee3'
+LINKEDIN_CONSUMER_KEY = 'r4nwqges9hsj'
+LINKEDIN_CONSUMER_SECRET = 'rXpDiwOJVQYdrkjf'
+GOOGLE_CONSUMER_KEY = '443446738252.apps.googleusercontent.com'
+GOOGLE_CONSUMER_SECRET = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
 
 
-LOGIN_URL          = '/home/login-form/'
+LOGIN_URL = '/home/login-form/'
 LOGIN_REDIRECT_URL = '/home/logged-in/'
-LOGIN_ERROR_URL    = '/home/login-error/'
+LOGIN_ERROR_URL = '/home/login-error/'
 
-SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'

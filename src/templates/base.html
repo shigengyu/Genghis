@@ -44,21 +44,21 @@
 						<!-- Dropdown menu -->
 						<ul class="dropdown-menu">
 							<li>
-								<a href="{% url 'socialauth_begin' 'google' %}">
+								<a href="{% url 'socialauth_begin' 'google' %}?next={{ request.get_full_path }}">
 									<span>
 										<img class="login-icon" src="/static/img/google.png" />Google
 									</span>
 								</a>
 							</li>
 							<li>
-								<a href="{% url 'socialauth_begin' 'facebook' %}">
+								<a href="{% url 'socialauth_begin' 'facebook' %}?next={{ request.get_full_path }}">
 									<span>
 										<img class="login-icon" src="/static/img/facebook.png" />Facebook
 									</span>
 								</a>
 							</li>
 							<li>
-								<a href="{% url 'socialauth_begin' 'linkedin' %}">
+								<a href="{% url 'socialauth_begin' 'linkedin' %}?next={{ request.get_full_path }}">
 									<span>
 										<img class="login-icon" src="/static/img/linkedin.png" />LinkedIn
 									</span>
