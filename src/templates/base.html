@@ -97,9 +97,13 @@
 
 				<!-- Breadcrumb -->
 				<div class="bread-crumb pull-right">
-					<a href="index.html"><i class="icon-home"></i>Home</a>
-					<!-- Divider -->
-					<span class="divider">/</span> <a href="#" class="bread-current">Forms</a>
+					<a href="/"><i class="icon-home"></i>Home</a>
+					{% if path != None %}
+						{% for item in path %}
+							<span class="divider">/</span>
+							<a href="{{ item.url }}" class="bread-current">{{ item.name }}</a>
+						{% endfor %}
+					{% endif %}
 				</div>
 				<div class="clearfix"></div>
 			</div>

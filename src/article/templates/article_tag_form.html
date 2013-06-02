@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block head %}
+<h2 class="pull-left">
+	Article Tags <span class="page-meta">Create New</span>
+</h2>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+	<div class="span9">
+
+		<!-- Widget -->
+		<div class="widget worange">
+			<!-- Widget head -->
+			<div class="widget-head">
+				<div class="pull-left">Article Tags</div>
+			</div>
+
+			<!-- Widget content -->
+			<div class="widget-content">
+				<div class="padd">
+
+					<form class="form-horizontal" action="/article/tag/create/"
+						method="post">
+						
+						<h6>Contents</h6>
+						<hr />
+
+						<!-- Name -->
+						<div class="control-group">
+							<label class="control-label" for="name">Name</label>
+							<div class="controls">{{ form.name }}</div>
+						</div>
+
+						<!-- Display Name -->
+						<div class="control-group">
+							<label class="control-label" for="display_name">Display Name</label>
+							<div class="controls">{{ form.display_name }}</div>
+						</div>
+
+
+						{% csrf_token %}
+						<button type="submit" class="btn btn-info">Save</button>
+					</form>
+				</div>
+			</div>
+			<div class="widget-foot">
+				<!-- Footer goes here -->
+			</div>
+			<!-- Widget ends -->
+
+		</div>
+	</div>
+</div>
+{% endblock %}
