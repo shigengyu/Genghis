@@ -35,14 +35,20 @@
 				<a href="/home" class="brand"> {% block brand %} Univer' Blog {%endblock %} </a>
 
 				<!-- Links -->
-				<ul class="nav pull-right">				
+				<ul class="nav pull-right">
 					<li class="dropdown pull-right">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							Login <b class="caret"></b>
+							{% if request.user.is_authenticated %}
+								{{ request.user.get_full_name }}
+							{% else %}
+								Login
+							{% endif %}
+							<b class="caret"></b>
 						</a>
 						
 						<!-- Dropdown menu -->
 						<ul class="dropdown-menu">
+							{% if not request.user.is_authenticated %}
 							<li>
 								<a href="{% url 'socialauth_begin' 'google' %}?next={{ request.get_full_path }}">
 									<span>
@@ -64,7 +70,13 @@
 									</span>
 								</a>
 							</li>
-							<li><a href=""><i class="icon-off"></i>Logout</a></li>
+							{% else %}
+							<li>
+								<a href="/home/logout">
+									<span class="logout-icon"><i class="icon-off"></i></span>Logout
+								</a>
+							</li>
+							{% endif %}
 						</ul>
 					</li>
 				</ul>

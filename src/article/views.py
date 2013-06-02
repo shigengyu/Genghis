@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from article.models import Article
 from article.forms import ArticleForm
 
+
 class ArticleView(TemplateView):
     template_name = 'article_list.html'
     
@@ -24,7 +25,7 @@ class ArticleCreate(CreateView):
         current_time = datetime.now()
         data.create_date_time = current_time
         data.update_date_time = current_time
-        data.author = 'Univer'
+        data.author = self.request.user
         data.save()
         return super(ArticleCreate, self).form_valid(form)
         

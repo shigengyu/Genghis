@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'China/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -164,6 +164,10 @@ LOGGING = {
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
 )
 
 
@@ -183,7 +187,6 @@ LINKEDIN_CONSUMER_KEY = 'r4nwqges9hsj'
 LINKEDIN_CONSUMER_SECRET = 'rXpDiwOJVQYdrkjf'
 GOOGLE_CONSUMER_KEY = '443446738252.apps.googleusercontent.com'
 GOOGLE_CONSUMER_SECRET = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
-
 
 LOGIN_URL = '/home/login-form/'
 LOGIN_REDIRECT_URL = '/home/logged-in/'
