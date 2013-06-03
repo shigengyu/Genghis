@@ -22,12 +22,8 @@ class Article(Model):
     def __unicode__(self):
         return self.subject
 
-class ArticleForm(Form):
-    class Meta:
-        model = Article
 
 class ArticleComment(Model):
-    id = models.AutoField(primary_key=True)
     article = models.ForeignKey(Article)
     subject = models.CharField(max_length=256)
     content = models.TextField()
