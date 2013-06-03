@@ -189,7 +189,7 @@ GOOGLE_CONSUMER_KEY = '443446738252.apps.googleusercontent.com'
 GOOGLE_CONSUMER_SECRET = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
 
 LOGIN_URL = '/home/login-form/'
-LOGIN_REDIRECT_URL = '/home/logged-in/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL = '/home/login-error/'
 
 SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'

@@ -17,7 +17,7 @@
 			<div class="widget-content">
 				<div class="padd">
 
-					<form class="form-horizontal" action="/article/create/"
+					<form class="form-horizontal" action="/article/{{ action }}/{% if id %}{{ id }}/{% endif %}"
 						method="post">
 
 						<!-- Subject -->

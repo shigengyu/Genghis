@@ -2,7 +2,7 @@
 
 {% block head %}
 <h2 class="pull-left">
-	Articles <span class="page-meta">Articles</span>
+	Articles <span class="page-meta">All Articles</span>
 </h2>
 {% endblock %}
 
@@ -13,11 +13,15 @@
 		{% for article in articles %}
 
 		<!-- Widget -->
-		<div class="widget">
+		<div class="widget wlightblue">
 			<!-- Widget head -->
 			<div class="widget-head">
 				<div class="pull-left">{{ article.subject }}</div>
 				<div class="widget-icons pull-right">
+					{% if article.author == request.user.id|slugify %}
+						<a href="/article/update/{{ article.id }}"><i class="icon-edit"></i></a>
+						<a href="/article/delete/{{ article.id }}"><i class="icon-remove"></i></a>
+					{% endif %}
 					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
 				</div>
 			</div>
@@ -30,7 +34,7 @@
 			</div>
 			<div class="widget-foot">
 				{% if article.create_date_time  %}
-					Posted by {{article.author }} on {{ article.create_date_time }}
+					Posted by {{ article.author }} on {{ article.create_date_time }}
 				{% endif %}
 				
 				{% if article.update_date_time != article.create_date_time %}

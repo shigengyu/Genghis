@@ -24,20 +24,40 @@ class ArticleCreate(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleCreate, self).get_context_data(**kwargs)
+        context['action'] = 'create'
         context['path'] = (PathItem('/article', 'Article'), PathItem('/article/create', 'Create Article'))
         return context
     
     def form_valid(self, form):
+        if (not self.request.user.is_authenticated()):
+            return HttpResponseRedirect('/home/login')
+        
         data = form.save(commit=False)
         current_time = datetime.now()
         data.create_date_time = current_time
         data.update_date_time = current_time
-        data.author = request.user.get_full_name()
+        data.author = self.request.user.id
         data.save()
         return super(ArticleCreate, self).form_valid(form)
         
 class ArticleUpdate(UpdateView):
     template_name = 'article_form.html'
+    form_class = ArticleForm
+    success_url = '/article'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ArticleUpdate, self).get_context_data(**kwargs)
+        context['action'] = 'update'
+        context['id'] = self.object.pk
+        context['path'] = (PathItem('/article', 'Article'), PathItem('/article/update/' + str(self.object.pk), 'Update Article'))
+        return context
+    
+    def get_queryset(self):
+        queryset =  Article.objects.all()
+        return queryset
+    
+    def form_valid(self, form):
+        return super(ArticleUpdate, self).form_valid(form)
 
 
 class ArticleTagList(TemplateView):
@@ -72,8 +92,9 @@ class ArticleTagUpdate(UpdateView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleTagUpdate, self).get_context_data(**kwargs)
-        context['action'] = 'update/' + kwargs.get('pk')
-        context['path'] = (PathItem('/article', 'Article'), PathItem('/article/tag', 'Tags'), PathItem('/article/tag/update', 'Update Tag'))
+        context['action'] = 'update'
+        context['id'] = self.object.pk
+        context['path'] = (PathItem('/article', 'Article'), PathItem('/article/tag', 'Tags'), PathItem('/article/tag/update/' + str(self.object.pk), 'Update Tag'))
         return context
     
     def get_queryset(self):

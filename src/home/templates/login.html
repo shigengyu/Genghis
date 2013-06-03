@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block title %}Home - Univer's Blog{% endblock %}
 
@@ -6,9 +7,9 @@
 
 {% block content %}
 <div class="row-fluid">
-	<div class="span9">
+	<div class="span12">
 		<!-- Widget -->
-		<div class="widget">
+		<div class="widget wgreen">
 			<!-- Widget head -->
 			<div class="widget-head">
 				<div class="pull-left">Please Login</div>
@@ -17,10 +18,26 @@
 			<!-- Widget content -->
 			<div class="widget-content">
 				<div class="padd">
+					<ul class="activity">
+						<li>
+							<a href="{% url 'socialauth_begin' 'google' %}">
+								<img alt="Google" class="login-icon" src="{% static 'img/google.png' %}"> Google
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'socialauth_begin' 'facebook' %}">
+								<img alt="Facebook" class="login-icon" src="{% static 'img/facebook.png' %}"> Facebook
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'socialauth_begin' 'linkedin' %}">
+								<img alt="LinkedIn" class="login-icon" src="{% static 'img/linkedin.png' %}"> LinkedIn
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
-			<div class="widget-foot">
-			</div>
+			<div class="widget-foot"></div>
 		</div>
 	</div>
 </div>

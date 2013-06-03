@@ -4,7 +4,7 @@ from article.views import ArticleList, ArticleCreate, ArticleUpdate, ArticleTagL
 urlpatterns = patterns('',
     url(r'^$', ArticleList.as_view()),
     url(r'^create/$', ArticleCreate.as_view()),
-    url(r'^update/(?P<id>\d+)/$', ArticleUpdate.as_view()),
+    url(r'^update/(?P<pk>\d+)/$', ArticleUpdate.as_view()),
     url(r'^tag/$', ArticleTagList.as_view()),
     url(r'^tag/create/', ArticleTagCreate.as_view()),
     url(r'^tag/update/(?P<pk>\d+)/$', ArticleTagUpdate.as_view()),
