@@ -13,7 +13,7 @@ class ArticleList(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
-        context['articles'] = Article.objects.order_by('-create_date_time')
+        context['articles'] = Article.objects.order_by('-create_date_time').select_related()
         context['path'] = (PathItem('/article', 'Article'),)
         return context
 
@@ -37,7 +37,7 @@ class ArticleCreate(CreateView):
         current_time = datetime.now()
         data.create_date_time = current_time
         data.update_date_time = current_time
-        data.author = self.request.user.id
+        data.author = self.request.user
         data.save()
         return super(ArticleCreate, self).form_valid(form)
         
@@ -59,6 +59,11 @@ class ArticleUpdate(UpdateView):
         return queryset
     
     def form_valid(self, form):
+        if (not self.request.user.is_authenticated()):
+            return HttpResponseRedirect('/home/login')
+        
+        data = self.object
+        data.update_date_time = datetime.now()
         return super(ArticleUpdate, self).form_valid(form)
 
 
@@ -78,6 +83,11 @@ class ArticleDelete(DeleteView):
         queryset = Article.objects.all()
         return queryset
 
+    def delete(self, request, *args, **kwargs):
+        if (not self.request.user.is_authenticated()):
+            return HttpResponseRedirect('/home/login')
+        
+        return super(ArticleDelete, self).delete(request)
 
 
 class ArticleTagList(TemplateView):

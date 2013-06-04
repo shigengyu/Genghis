@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+<h2 class="pull-left">
+	Files <span class="page-meta">All Files</span>
+</h2>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+	<table id="tags" class="table table-bordered">
+		<tr>
+			<th class="span1"><center>ID</center></th>
+			<th class="span2">Name</th>
+			<th class="span4">Description</th>
+			<th class="span2">Upload By</th>
+			<th class="span2">Upload Time</th>
+			<th class="span1">Link</th>
+		</tr>
+		{% for file in files %}
+		<tr>
+			<td>{{ file.id }}</td>
+			<td>{{ file.name }}</td>
+			<td>{{ file.description }}</td>
+			<td>{{ file.uploaded_by.get_full_name }}</td>
+			<td>{{ file.upload_date_time }}</td>
+			<td><a href="{% static 'uploaded' %}/{{ file.attachment }}" target="_blank">Download</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<hr />
+	<button class="btn btn-info">Upload New</button>
+</div>
+{% endblock %}
