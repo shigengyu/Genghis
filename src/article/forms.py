@@ -5,11 +5,12 @@ from django.forms.widgets import TextInput, Textarea
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ('subject', 'content')
+        fields = ('subject', 'content', 'tags')
         widgets = {
             'subject': TextInput(attrs={'class':'span11'}),
             'content': Textarea(attrs={'class':'span11', 'rows': '10'}),
         }
+    
 
 class ArticleTagForm(ModelForm):
     class Meta:
