@@ -17,7 +17,6 @@ class ArticleList(TemplateView):
         context['path'] = (PathItem('/article', 'Article'),)
         return context
 
-
 class ArticleCreate(CreateView):
     template_name = 'article_form.html'
     form_class = ArticleForm
@@ -28,7 +27,7 @@ class ArticleCreate(CreateView):
         context['action'] = 'create'
         context['path'] = (PathItem('/article', 'Article'), PathItem('/article/create', 'Create Article'))
         return context
-    
+
     def form_valid(self, form):
         if (not self.request.user.is_authenticated()):
             return HttpResponseRedirect('/home/login')
@@ -55,7 +54,7 @@ class ArticleUpdate(UpdateView):
         return context
     
     def get_queryset(self):
-        queryset =  Article.objects.all()
+        queryset = Article.objects.all()
         return queryset
     
     def form_valid(self, form):
@@ -130,7 +129,7 @@ class ArticleTagUpdate(UpdateView):
         return context
     
     def get_queryset(self):
-        queryset =  ArticleTag.objects.all()
+        queryset = ArticleTag.objects.all()
         return queryset
 
     def form_valid(self, form):
@@ -143,5 +142,5 @@ class ArticleTagDelete(DeleteView):
     success_url = '/article/tag'
     
     def get_queryset(self):
-        queryset =  ArticleTag.objects.all()
+        queryset = ArticleTag.objects.all()
         return queryset

@@ -17,25 +17,23 @@
 
 			<!-- Widget content -->
 			<div class="widget-content">
-				<div class="padd">
-					<ul class="activity">
-						<li>
-							<a href="{% url 'socialauth_begin' 'google' %}?next={{ request.return_url }}">
-								<img alt="Google" class="login-icon" src="{% static 'img/google.png' %}"> Google
-							</a>
-						</li>
-						<li>
-							<a href="{% url 'socialauth_begin' 'facebook' %}?next={{ request.return_url }}">
-								<img alt="Facebook" class="login-icon" src="{% static 'img/facebook.png' %}"> Facebook
-							</a>
-						</li>
-						<li>
-							<a href="{% url 'socialauth_begin' 'linkedin' %}?next={{ request.return_url }}">
-								<img alt="LinkedIn" class="login-icon" src="{% static 'img/linkedin.png' %}"> LinkedIn
-							</a>
-						</li>
-					</ul>
-				</div>
+				<ul class="activity">
+					<li>
+						<a href="{% url 'socialauth_begin' 'google' %}?next={{ request.return_url }}">
+							<img alt="Google" class="login-icon" src="{% static 'img/google.png' %}"> Google
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'socialauth_begin' 'facebook' %}?next={{ request.return_url }}">
+							<img alt="Facebook" class="login-icon" src="{% static 'img/facebook.png' %}"> Facebook
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'socialauth_begin' 'linkedin' %}?next={{ request.return_url }}">
+							<img alt="LinkedIn" class="login-icon" src="{% static 'img/linkedin.png' %}"> LinkedIn
+						</a>
+					</li>
+				</ul>
 			</div>
 			<div class="widget-foot"></div>
 		</div>
