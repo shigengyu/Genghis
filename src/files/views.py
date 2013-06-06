@@ -12,7 +12,7 @@ class FileList(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(FileList, self).get_context_data(**kwargs)
-        context['files'] = File.objects.order_by('-upload_date_time').select_related()
+        context['files'] = File.objects.order_by('id').select_related()
         context['path'] = (PathItem('/files', 'Files'),)
         return context
 
@@ -35,3 +35,25 @@ class FileUpload(CreateView):
         data.uploaded_by = self.request.user
         data.save()
         return super(FileUpload, self).form_valid(form)
+
+class FileDelete(DeleteView):
+    template_name = 'file_confirm_delete.html'
+    form_class = FileForm
+    success_url = '/files'
+    
+    def get_context_data(self, **kwargs):
+        context = super(FileDelete, self).get_context_data(**kwargs)
+        context['id'] = self.object.pk
+        context['file'] = self.object
+        context['path'] = (PathItem('/files', 'Files'), PathItem('/files/delete/' + str(self.object.pk), 'Confirm Delete File'))
+        return context
+    
+    def get_queryset(self):
+        queryset = File.objects.all()
+        return queryset
+
+    def delete(self, request, *args, **kwargs):
+        if (not self.request.user.is_authenticated()):
+            return HttpResponseRedirect('/home/login')
+        
+        return super(FileDelete, self).delete(request)

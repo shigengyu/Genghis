@@ -1,5 +1,5 @@
 from django.forms.models import ModelForm
-from files.models import File, FileTag
+from files.models import File
 from django.forms.widgets import TextInput, Textarea, FileInput
 
 class FileForm(ModelForm):

@@ -1,39 +1,44 @@
-{% extends "base.html" %}
-
-{% block head %}
+{% extends "base.html" %} {% block head %}
 <h2 class="pull-left">
 	Article Tags <span class="page-meta">Manage</span>
 </h2>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="row-fluid">
-	<table id="tags" class="table table-bordered">
-		<tr>
-			<th class="span1"><center>ID</center></th>
-			<th class="span3">Name</th>
-			<th class="span5">Display Name</th>
-			<th class="span5">Actions</th>
-		</tr>
-		{% for tag in article_tags %}
-		<tr>
-			<td>{{ tag.id }}</td>
-			<td>{{ tag.name }}</td>
-			<td>{{ tag.display_name }}</td>
-			<td>
-				<button class="btn btn-warning update">Update</button>
-				<button class="btn btn-danger delete">Delete</button>
-			</td>
-		</tr>
-		{% endfor %}
-	</table>
-	
-	<hr />
-	<button class="btn btn-info">Create</button>
-</div>
-{% endblock %}
+	<div class="widget worange">
+		<!-- Widget head -->
+		<div class="widget-head">
+			<div class="pull-left">Upload File</div>
+		</div>
 
-{% block script %}
+		<!-- Widget content -->
+		<div class="widget-content referrer">
+			<table id="tags" class="table table-bordered">
+				<tr>
+					<th class="span1"><center>ID</center></th>
+					<th class="span3">Name</th>
+					<th class="span5">Display Name</th>
+					<th class="span5">Actions</th>
+				</tr>
+				{% for tag in article_tags %}
+				<tr>
+					<td><center>{{ tag.id }}</center></td>
+					<td>{{ tag.name }}</td>
+					<td>{{ tag.display_name }}</td>
+					<td>
+						<button class="btn btn-warning update">Update</button>
+						<button class="btn btn-danger delete">Delete</button>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<!-- Widget ends -->
+
+	<button class="btn btn-info">Create</button>
+
+</div>
+{% endblock %} {% block script %}
 <script>
 	$().ready(function() {
 		$('.update').each(function(index, element) {

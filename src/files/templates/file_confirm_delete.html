@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block head %}
+<h2 class="pull-left">
+	File <span class="page-meta">Confirm Delete</span>
+</h2>
+{% endblock %} {% block content %}
+
+<div class="row-fluid">
+	<div class="span12">
+		<h6>
+			Are you sure to delete file <span class="red"><strong>{{ file.name }}</strong></span> ?
+		</h6>
+		<hr />
+		
+		<form class="form-horizontal" action="/files/delete/{{ id }}/"
+			method="post">
+
+			{% csrf_token %}
+			<button type="submit" class="btn btn-danger">Delete</button>
+			<button id="cancel" type="button" class="btn btn-warning">Cancel</button>
+		</form>
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+	$().ready(function() {
+		$('#cancel').click(function() {
+			location.href = '/files'
+		});
+	});
+</script>
+{% endblock %}
