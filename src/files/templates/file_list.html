@@ -26,10 +26,10 @@
 					<th class="span1"><center>ID</center></th>
 					<th class="span2">Name</th>
 					<th class="span3">Description</th>
-					<th class="span2">Upload By</th>
+					<th class="span1">Upload By</th>
 					<th class="span2">Upload Time</th>
 					<th class="span1">Link</th>
-					<th class="span1">Delete</th>
+					<th class="span2">Actions</th>
 				</tr>
 				{% for file in files %}
 				<tr>
@@ -40,7 +40,10 @@
 					<td>{{ file.upload_date_time }}</td>
 					<td><a href="{% static 'uploaded' %}/{{ file.attachment }}"
 						target="_blank">Download</a></td>
-					<td><a href="/files/delete/{{ file.id }}">Delete</a></td>
+					<td>
+						<a href="/files/update/{{ file.id }}">Update</a> | 
+						<a href="/files/delete/{{ file.id }}">Delete</a>
+					</td>
 				</tr>
 				{% endfor %}
 			</table>

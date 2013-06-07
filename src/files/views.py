@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from files.models import File
-from files.forms import FileForm
+from files.forms import FileUploadForm, FileUpdateForm
 from home.models import PathItem
 
 class FileList(TemplateView):
@@ -17,8 +17,8 @@ class FileList(TemplateView):
         return context
 
 class FileUpload(CreateView):
-    template_name = 'file_form.html'
-    form_class = FileForm
+    template_name = 'file_upload.html'
+    form_class = FileUploadForm
     success_url = '/files'
     
     def get_context_data(self, **kwargs):
@@ -36,9 +36,29 @@ class FileUpload(CreateView):
         data.save()
         return super(FileUpload, self).form_valid(form)
 
+class FileUpdate(UpdateView):
+    template_name = 'file_update.html'
+    form_class = FileUpdateForm
+    success_url = '/files'
+    
+    def get_context_data(self, **kwargs):
+        context = super(FileUpdate, self).get_context_data(**kwargs)
+        context['id'] = self.object.pk
+        context['path'] = (PathItem('/files', 'Files'), PathItem('/files/update/' + str(self.object.pk), 'Update File'))
+        return context
+    
+    def get_queryset(self):
+        queryset = File.objects.all()
+        return queryset
+    
+    def form_valid(self, form):
+        if (not self.request.user.is_authenticated()):
+            return HttpResponseRedirect('/home/login')
+        
+        return super(FileUpdate, self).form_valid(form)
+
 class FileDelete(DeleteView):
     template_name = 'file_confirm_delete.html'
-    form_class = FileForm
     success_url = '/files'
     
     def get_context_data(self, **kwargs):

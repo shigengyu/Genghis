@@ -23,39 +23,47 @@
 			<div class="widget-content">
 				<div class="padd">
 					{{ article.content }}
+					
+					{% if article.attachments.all %}
+						<br /><br /><br />
+						<h6>Attachments</h6>
+						<hr />
+						{% for attachment in article.attachments.all %}
+							<a href="{% static 'uploaded' %}/{{ attachment.attachment }}" target="_blank">
+								<i class="icon-file"></i> {{ attachment.name }}
+							</a>&nbsp;
+						{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 			
 			<div class="widget-foot">
-				<h6>Attachments</h6>
-				{% if article.attachments.all %}
-					{% for attachment in article.attachments.all %}
-						<a href="{% static 'uploaded' %}/{{ attachment.attachment }}" target="_blank">
-							<i class="icon-file"></i> {{ attachment.name }}
-						</a>&nbsp;
-					{% endfor %}
+				{% if article.create_date_time  %}
+					Posted by <i>{{ article.author.get_full_name }}</i> on {{ article.create_date_time }}
+				{% endif %}
+				
+				{% if article.update_date_time != article.create_date_time %}
+					&nbsp;&nbsp;Last updated on {{ article.update_date_time }}
 				{% endif %}
 			</div>
 		</div>
 	</div>
 
 	<div class="span3">
-		<div class="container-fluid">
-			<div class="widget worange">
-				<div class="widget-head">
-					<div class="pull-left">Tags</div>
-					<div class="widget-icons pull-right">
-						<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
-					</div>
-					<div class="clearfix"></div>
+		<div class="widget worange">
+			<div class="widget-head">
+				<div class="pull-left">Tags</div>
+				<div class="widget-icons pull-right">
+					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
 				</div>
+				<div class="clearfix"></div>
+			</div>
 
-				<div class="widget-content">
-					<div class="padd">
-						{% if article.tags.all %}
-						{% for tag in article.tags.all %} {{ tag.display_name }} {% endfor %}
-						{% endif %}
-					</div>
+			<div class="widget-content">
+				<div class="padd">
+					{% if article.tags.all %}
+					{% for tag in article.tags.all %} {{ tag.display_name }} {% endfor %}
+					{% endif %}
 				</div>
 			</div>
 		</div>

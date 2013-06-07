@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block head %}
+<h2 class="pull-left">
+	File <span class="page-meta">Upload</span>
+</h2>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+	<div class="span9">
+
+		<!-- Widget -->
+		<div class="widget wlightblue">
+			<!-- Widget head -->
+			<div class="widget-head">
+				<div class="pull-left">Upload File</div>
+			</div>
+
+			<!-- Widget content -->
+			<div class="widget-content">
+				<div class="padd">
+
+					<form class="form-horizontal" action="/files/upload/"
+						method="post" enctype="multipart/form-data">
+
+						<!-- Name -->
+						<div class="control-group">
+							<label class="control-label" for="subject">Name</label>
+							<div class="controls">{{ form.name }}</div>
+						</div>
+
+						<!-- Description -->
+						<div class="control-group">
+							<label class="control-label" for="content">Description</label>
+							<div class="controls">{{ form.description }}</div>
+						</div>
+
+						<!-- Attachment -->
+						<div class='file-checkbox'>
+							<label class="control-label" for="content">Attachment</label>
+							<div class="controls">{{ form.attachment }}</div>
+						</div>
+
+						<hr />
+
+						{% csrf_token %}
+						<button type="submit" class="btn btn-info">Submit</button>
+					</form>
+				</div>
+			</div>
+			<div class="widget-foot">
+				<!-- Footer goes here -->
+			</div>
+			<!-- Widget ends -->
+
+		</div>
+	</div>
+
+	<div class="span3">
+		<div class="widget worange">
+			<div class="widget-head">
+				<div class="pull-left">Tags</div>
+				<div class="widget-icons pull-right">
+					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> <a
+						href="#" class="wclose"><i class="icon-remove"></i></a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="widget-content">
+				<div class="padd"></div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+{% endblock %}
+

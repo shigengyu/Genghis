@@ -1,6 +1,6 @@
 from django.forms.models import ModelForm
 from article.models import Article, ArticleTag
-from django.forms.widgets import TextInput, Textarea
+from django.forms.widgets import TextInput, Textarea, SelectMultiple
 
 class ArticleForm(ModelForm):
     class Meta:
@@ -9,6 +9,8 @@ class ArticleForm(ModelForm):
         widgets = {
             'subject': TextInput(attrs={'class':'span11'}),
             'content': Textarea(attrs={'class':'span11', 'rows': '10'}),
+            'tags': SelectMultiple(attrs={'class':'span3'}),
+            'attachments': SelectMultiple(attrs={'class':'span11'}),
         }
     
 
