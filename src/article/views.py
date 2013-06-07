@@ -2,6 +2,7 @@ from datetime import datetime
 from django.http.response import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from article.models import Article, ArticleTag
 from article.forms import ArticleForm, ArticleTagForm
@@ -16,6 +17,18 @@ class ArticleList(TemplateView):
         context['articles'] = Article.objects.order_by('-create_date_time').select_related()
         context['path'] = (PathItem('/article', 'Article'),)
         return context
+
+
+class ArticleDetail(DetailView):
+    template_name = 'article_detail.html'
+    model = Article
+    
+    def get_context_data(self, **kwargs):
+        context = super(ArticleDetail, self).get_context_data(**kwargs)
+        context['article'] = self.object
+        context['path'] = (PathItem('/article', 'Article'), PathItem('/article/detail/' + str(self.object.pk), 'Article Detail'))
+        return context
+
 
 class ArticleCreate(CreateView):
     template_name = 'article_form.html'
