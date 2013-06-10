@@ -33,10 +33,10 @@
 					data-target=".nav-collapse"> </a>
 				<!-- Site name for smallar screens -->
 				<a href="/home" class="brand"> {% block brand %} Univer' Blog {%endblock %} </a>
-
-				<!-- Links -->
+				
+				<!-- Login -->
 				<ul class="nav pull-right">
-					<li class="dropdown pull-right">
+					<li class="dropdown pull-right">					
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							{% if request.user.is_authenticated %}
 								{{ request.user.get_full_name }}
@@ -80,6 +80,24 @@
 						</ul>
 					</li>
 				</ul>
+				
+				<!-- Admin -->
+				{% if is_admin %}
+				<ul class="nav pull-right">
+					<li class="dropdown pull-right">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							Admin
+							<b class="caret"></b>
+						</a>
+						
+						<!-- Dropdown menu -->
+						<ul class="dropdown-menu">
+							<li><a href="/article/create">Create Article</a></li>
+							<li><a href="/article/tag">Manage Tags</a></li>
+						</ul>
+					</li>
+				</ul>
+				{% endif %}
 			</div>
 		</div>
 	</div>

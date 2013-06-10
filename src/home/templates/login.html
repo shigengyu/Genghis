@@ -19,17 +19,17 @@
 			<div class="widget-content">
 				<ul class="activity">
 					<li>
-						<a href="{% url 'socialauth_begin' 'google' %}?next={{ request.return_url }}">
+						<a href="{% url 'socialauth_begin' 'google' %}?next={{ next }}">
 							<img alt="Google" class="login-icon" src="{% static 'img/google.png' %}"> Google
 						</a>
 					</li>
 					<li>
-						<a href="{% url 'socialauth_begin' 'facebook' %}?next={{ request.return_url }}">
+						<a href="{% url 'socialauth_begin' 'facebook' %}?next={{ next }}">
 							<img alt="Facebook" class="login-icon" src="{% static 'img/facebook.png' %}"> Facebook
 						</a>
 					</li>
 					<li>
-						<a href="{% url 'socialauth_begin' 'linkedin' %}?next={{ request.return_url }}">
+						<a href="{% url 'socialauth_begin' 'linkedin' %}?next={{ next }}">
 							<img alt="LinkedIn" class="login-icon" src="{% static 'img/linkedin.png' %}"> LinkedIn
 						</a>
 					</li>

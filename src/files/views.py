@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from files.models import File
 from files.forms import FileUploadForm, FileUpdateForm
 from home.models import PathItem
+from home.authentication import RequireLogin
 
 class FileList(TemplateView):
     template_name = 'file_list.html'
@@ -21,15 +22,17 @@ class FileUpload(CreateView):
     form_class = FileUploadForm
     success_url = '/files'
     
+    @RequireLogin
+    def get(self, request, *args, **kwargs):
+        return super(FileUpload, self).get(request, *args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(FileUpload, self).get_context_data(**kwargs)
         context['path'] = (PathItem('/files', 'Files'), PathItem('/files/upload', 'Upload File'))
         return context
-    
+
+    @RequireLogin
     def form_valid(self, form):
-        if (not self.request.user.is_authenticated()):
-            return HttpResponseRedirect('/home/login')
-        
         data = form.save(commit=False)
         data.upload_date_time = datetime.now()
         data.uploaded_by = self.request.user
@@ -41,6 +44,10 @@ class FileUpdate(UpdateView):
     form_class = FileUpdateForm
     success_url = '/files'
     
+    @RequireLogin
+    def get(self, request, *args, **kwargs):
+        return super(FileUpdate, self).get(request, *args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(FileUpdate, self).get_context_data(**kwargs)
         context['id'] = self.object.pk
@@ -51,15 +58,17 @@ class FileUpdate(UpdateView):
         queryset = File.objects.all()
         return queryset
     
-    def form_valid(self, form):
-        if (not self.request.user.is_authenticated()):
-            return HttpResponseRedirect('/home/login')
-        
+    @RequireLogin
+    def form_valid(self, form):        
         return super(FileUpdate, self).form_valid(form)
 
 class FileDelete(DeleteView):
     template_name = 'file_confirm_delete.html'
     success_url = '/files'
+    
+    @RequireLogin
+    def get(self, request, *args, **kwargs):
+        return super(FileDelete, self).get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super(FileDelete, self).get_context_data(**kwargs)
@@ -72,8 +81,6 @@ class FileDelete(DeleteView):
         queryset = File.objects.all()
         return queryset
 
+    @RequireLogin
     def delete(self, request, *args, **kwargs):
-        if (not self.request.user.is_authenticated()):
-            return HttpResponseRedirect('/home/login')
-        
         return super(FileDelete, self).delete(request)
