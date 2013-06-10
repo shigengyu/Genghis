@@ -7,11 +7,11 @@
 <div class="row-fluid">
 	<div class="span12">
 		<h6>
-			Are you sure to delete article <span class="red"><strong>{{ article.subject }}</strong></span> ?
+			Are you sure to delete article tag <span class="red"><strong>{{ tag.name }}</strong></span> ?
 		</h6>
 		<hr />
 		
-		<form class="form-horizontal" action="/article/delete/{{ id }}/"
+		<form class="form-horizontal" action="/article/tag/delete/{{ tag.id }}/"
 			method="post">
 
 			{% csrf_token %}
@@ -28,7 +28,7 @@
 <script>
 	$().ready(function() {
 		$('#cancel').click(function() {
-			location.href = '/article'
+			location.href = '/article/tag'
 		});
 	});
 </script>

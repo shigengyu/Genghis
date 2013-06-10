@@ -82,7 +82,7 @@
 				</ul>
 				
 				<!-- Admin -->
-				{% if is_admin %}
+				{% if request.user.is_authenticated and is_admin %}
 				<ul class="nav pull-right">
 					<li class="dropdown pull-right">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">

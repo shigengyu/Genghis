@@ -1,4 +1,4 @@
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 from genghis.settings import ADMINS
 from django.contrib.auth.models import User
 
@@ -25,9 +25,8 @@ class RequireLogin(object):
 class RequireAdmin(RequireLogin):
     
     def __call__(self, *args, **kwargs):
-        if (is_admin(self.instance.request.user)):
-            return_url = self.instance.request.get_full_path()
-            return HttpResponseRedirect('/home/login?next=' + return_url)
+        if (not is_admin(self.instance.request.user)):
+            return HttpResponseForbidden()
         
         result = self.func.__call__(self.instance, *args, **kwargs)
         return result

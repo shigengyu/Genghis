@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from files.models import File
 from files.forms import FileUploadForm, FileUpdateForm
 from home.models import PathItem
-from home.authentication import RequireLogin
+from home.authentication import RequireAdmin
 
 class FileList(TemplateView):
     template_name = 'file_list.html'
@@ -22,7 +22,7 @@ class FileUpload(CreateView):
     form_class = FileUploadForm
     success_url = '/files'
     
-    @RequireLogin
+    @RequireAdmin
     def get(self, request, *args, **kwargs):
         return super(FileUpload, self).get(request, *args, **kwargs)
     
@@ -31,7 +31,7 @@ class FileUpload(CreateView):
         context['path'] = (PathItem('/files', 'Files'), PathItem('/files/upload', 'Upload File'))
         return context
 
-    @RequireLogin
+    @RequireAdmin
     def form_valid(self, form):
         data = form.save(commit=False)
         data.upload_date_time = datetime.now()
@@ -44,7 +44,7 @@ class FileUpdate(UpdateView):
     form_class = FileUpdateForm
     success_url = '/files'
     
-    @RequireLogin
+    @RequireAdmin
     def get(self, request, *args, **kwargs):
         return super(FileUpdate, self).get(request, *args, **kwargs)
     
@@ -58,7 +58,7 @@ class FileUpdate(UpdateView):
         queryset = File.objects.all()
         return queryset
     
-    @RequireLogin
+    @RequireAdmin
     def form_valid(self, form):        
         return super(FileUpdate, self).form_valid(form)
 
@@ -66,7 +66,7 @@ class FileDelete(DeleteView):
     template_name = 'file_confirm_delete.html'
     success_url = '/files'
     
-    @RequireLogin
+    @RequireAdmin
     def get(self, request, *args, **kwargs):
         return super(FileDelete, self).get(request, *args, **kwargs)
     
@@ -81,6 +81,6 @@ class FileDelete(DeleteView):
         queryset = File.objects.all()
         return queryset
 
-    @RequireLogin
+    @RequireAdmin
     def delete(self, request, *args, **kwargs):
         return super(FileDelete, self).delete(request)
