@@ -204,5 +204,5 @@ SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.live.com'
 EMAIL_HOST_USER = 'univer.shi@outlook.com'
-EMAIL_HOST_PASSWORD = os.environ['OUTLOOK_PASSWORD']
+EMAIL_HOST_PASSWORD = os.environ.get('OUTLOOK_PASSWORD', '')
 EMAIL_PORT = 587
