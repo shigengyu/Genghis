@@ -1,7 +1,7 @@
 import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as DEFAULT_TEMPLATE_CONTEXT_PROCESSORS
 
-DEBUG = True
+DEBUG = os.environ.get('GENGHIS_DEBUG') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -199,3 +199,9 @@ LOGIN_ERROR_URL = '/home/login-error/'
 
 SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'univer.shi@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['GMAIL_PASSWORD']
+EMAIL_PORT = 587
