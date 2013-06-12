@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     
     'home',
     'article',
-    'photo',
+    'photos',
     'files',
     'about',
     
@@ -177,15 +177,22 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.google.GoogleBackend',
     'social_auth.backends.contrib.linkedin.LinkedinBackend',
     'social_auth.backends.contrib.live.LiveBackend',
+    'social_auth.backends.contrib.flickr.FlickrBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 FACEBOOK_APP_ID = '592973724070224'
 FACEBOOK_API_SECRET = 'c3444c0aee28b1621934f65ce4d83ee3'
+
 LINKEDIN_CONSUMER_KEY = 'r4nwqges9hsj'
 LINKEDIN_CONSUMER_SECRET = 'rXpDiwOJVQYdrkjf'
+
 GOOGLE_CONSUMER_KEY = '443446738252.apps.googleusercontent.com'
 GOOGLE_CONSUMER_SECRET = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
+
+FLICKR_APP_ID = '3df70aba9a842de5341b02d611d11ab9'
+FLICKR_API_SECRET = '9a1c2a78626eda96'
+FLICKR_AUTH_EXTRA_ARGUMENTS = {'perms':'read'}
 
 LOGIN_URL = '/home/login-form/'
 LOGIN_REDIRECT_URL = '/'
@@ -193,5 +200,3 @@ LOGIN_ERROR_URL = '/home/login-error/'
 
 SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
-
-

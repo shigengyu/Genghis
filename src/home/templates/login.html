@@ -33,6 +33,11 @@
 							<img alt="LinkedIn" class="login-icon" src="{% static 'img/linkedin.png' %}"> LinkedIn
 						</a>
 					</li>
+					<li>
+						<a href="{% url 'socialauth_begin' 'flickr' %}?next={{ next }}">
+							<img alt="LinkedIn" class="login-icon" src="{% static 'img/flickr.png' %}"> Flickr
+						</a>
+					</li>
 				</ul>
 			</div>
 			<div class="widget-foot"></div>
