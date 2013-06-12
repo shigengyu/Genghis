@@ -1,5 +1,4 @@
-# Django settings for genghis project.
-
+import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as DEFAULT_TEMPLATE_CONTEXT_PROCESSORS
 
 DEBUG = True
@@ -14,7 +13,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'E:\Projects\GitHub\Genghis\src\sqlite.db',  # Or path to database file if using sqlite3.
+        'NAME': os.environ['GENGHIS_DATABASE'],  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -52,7 +51,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = 'E:/Projects/GitHub/Genghis/src/static/uploaded/'
+MEDIA_ROOT = os.environ['GENGHIS_MEDIA_ROOT']
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -73,7 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'E:\Projects\GitHub\Genghis\src\static',
+    os.environ['GENGHIS_STATICFILES_DIRS'],
 )
 
 # List of finder classes that know how to find static files in
@@ -85,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '16tw1uct3-*sld%8mmlf(ku67+k2(r*k@=b-e+wm6m#+sf-4cb'
+SECRET_KEY =  os.environ['GENGHIS_SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -112,7 +111,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "E:/Projects/GitHub/Genghis/src/templates/"
+    os.environ['GENGHIS_TEMPLATE_DIRS'],
 )
 
 INSTALLED_APPS = (
@@ -181,17 +180,17 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-FACEBOOK_APP_ID = '592973724070224'
-FACEBOOK_API_SECRET = 'c3444c0aee28b1621934f65ce4d83ee3'
+FACEBOOK_APP_ID = os.environ['GENGHIS_FACEBOOK_APP_ID']
+FACEBOOK_API_SECRET = os.environ['GENGHIS_FACEBOOK_API_SECRET']
 
-LINKEDIN_CONSUMER_KEY = 'r4nwqges9hsj'
-LINKEDIN_CONSUMER_SECRET = 'rXpDiwOJVQYdrkjf'
+LINKEDIN_CONSUMER_KEY = os.environ['GENGHIS_LINKEDIN_CONSUMER_KEY']
+LINKEDIN_CONSUMER_SECRET = os.environ['GENGHIS_LINKEDIN_CONSUMER_SECRET']
 
-GOOGLE_CONSUMER_KEY = '443446738252.apps.googleusercontent.com'
-GOOGLE_CONSUMER_SECRET = 'E1a_5-H_izUFq7O3BZ4jA7Ae'
+GOOGLE_CONSUMER_KEY = os.environ['GENGHIS_GOOGLE_CONSUMER_KEY']
+GOOGLE_CONSUMER_SECRET = os.environ['GENGHIS_GOOGLE_CONSUMER_SECRET']
 
-FLICKR_APP_ID = '3df70aba9a842de5341b02d611d11ab9'
-FLICKR_API_SECRET = '9a1c2a78626eda96'
+FLICKR_APP_ID = os.environ['GENGHIS_FLICKR_APP_ID']
+FLICKR_API_SECRET = os.environ['GENGHIS_FLICKR_API_SECRET']
 FLICKR_AUTH_EXTRA_ARGUMENTS = {'perms':'read'}
 
 LOGIN_URL = '/home/login-form/'
