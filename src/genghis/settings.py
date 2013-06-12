@@ -1,4 +1,4 @@
-import os, inspect
+import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as DEFAULT_TEMPLATE_CONTEXT_PROCESSORS
 
 DEBUG = os.environ.get('GENGHIS_DEBUG') != 'False'
@@ -67,14 +67,13 @@ MEDIA_URL = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
-BASE_DIR = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, os.pardir, "static"),
+    os.environ['GENGHIS_STATICFILES_DIRS'],
+    '/home/shigengy/genghis/src/static',
 )
 
 # List of finder classes that know how to find static files in
