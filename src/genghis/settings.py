@@ -1,4 +1,4 @@
-import os
+import os, inspect
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as DEFAULT_TEMPLATE_CONTEXT_PROCESSORS
 
 DEBUG = os.environ.get('GENGHIS_DEBUG') != 'False'
@@ -10,10 +10,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+GENGHIS_BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))), os.pardir)
+DATABASE_FILE_NAME = 'genghis.db'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.environ['GENGHIS_DATABASE'],  # Or path to database file if using sqlite3.
+        'NAME': os.path.join(GENGHIS_BASE_DIR, DATABASE_FILE_NAME),  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -51,7 +54,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.environ['GENGHIS_MEDIA_ROOT']
+MEDIA_ROOT = os.path.join(GENGHIS_BASE_DIR, os.pardir, 'uploaded')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -72,8 +75,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.environ['GENGHIS_STATICFILES_DIRS'],
-    '/home/shigengy/genghis/src/static',
+    os.path.join(GENGHIS_BASE_DIR, 'static'),
+    MEDIA_ROOT,
 )
 
 # List of finder classes that know how to find static files in
@@ -112,7 +115,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.environ['GENGHIS_TEMPLATE_DIRS'],
+    os.path.join(GENGHIS_BASE_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
