@@ -26,14 +26,17 @@
 				<div class="padd">
 					<div class="gallery">
 						{% for photo in photos %}
-						<!-- Full size image link in anchor tag. Thumbnail link in image tag. -->
-						<a href="{% static 'uploaded' %}/{{ photo.attachment }}" id="photo-link-{{ photo.id }}" class="prettyPhoto[pp_gal]">
-							<img src="{% static 'uploaded' %}/{{ photo.attachment }}" id="photo-{{ photo.id }}" alt="{{ photo.name }}" />
-							<input id="photo-name-{{ photo.id }}" type="hidden" value="{{ photo.name }}" />
-							<input id="photo-description-{{ photo.id }}" type="hidden" value="{{ photo.description }}" />
-							<input id="photo-source-{{ photo.id }}" type="hidden" value="{{ photo.source }}" />
-							<input id="photo-date-{{ photo.id }}" type="hidden" value="{{ photo.date }}" />
-						</a>
+						<div class="gallery-item">
+							<!-- Full size image link in anchor tag. Thumbnail link in image tag. -->
+							<a href="{% static 'uploaded' %}/{{ photo.attachment }}" class="prettyPhoto[pp_gal]">
+								<img src="{% static 'uploaded' %}/{{ photo.attachment }}" alt="{{ photo.name }}" />
+							</a>
+							<div class="gallery-text">
+								{{ photo.name }} <br />
+								{{ photo.description }} <br />
+								{{ photo.source }} on {{ photo.date }}
+							</div>
+						</div>
 						{% endfor %}
 					</div>
 				</div>

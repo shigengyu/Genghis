@@ -205,8 +205,8 @@ LOGIN_ERROR_URL = '/home/login-error/'
 SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.live.com'
-EMAIL_HOST_USER = 'univer.shi@outlook.com'
-EMAIL_HOST_PASSWORD = os.environ.get('OUTLOOK_PASSWORD', '')
-EMAIL_PORT = 587
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'mail.shigengyu.com'
+EMAIL_HOST_USER = 'me@shigengyu.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
+EMAIL_PORT = 26
