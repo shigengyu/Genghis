@@ -30,4 +30,4 @@ class RequireAdmin(RequireLogin):
         return result
 
 def is_admin(user):
-    return user.is_authenticated() and user.is_superuser == 1
+    return user.is_authenticated and user.is_superuser
