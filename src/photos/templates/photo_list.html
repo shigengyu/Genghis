@@ -1,0 +1,54 @@
+{% extends "file_base.html" %}
+
+{% load staticfiles %}
+
+{% block head %}
+<h2 class="pull-left">
+	Photos <span class="page-meta">All Photos</span>
+</h2>
+{% endblock %}
+
+{% block content %}
+
+<button id="upload" class="btn btn-warning">Upload New</button>
+
+<div class="row-fluid">
+	<div class="widget wviolet">
+		<!-- Widget head -->
+		<div class="widget-head">
+			<div class="pull-left">Photo List</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<!-- Widget content -->
+		<div class="widget-content">
+			<div class="padd">
+				<div class="gallery">
+					<!-- Full size image link in anchor tag. Thumbnail link in image tag. -->
+					{% for photo in photos %}
+						<a href="{% static 'uploaded' %}/{{ photo.attachment }}" class="prettyPhoto[pp_gal]">
+							<img src="{% static 'uploaded' %}/{{ photo.attachment }}" alt="{{ photo.name }}">
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="widget-foot">
+			<!-- Footer goes here -->
+		</div>
+		<!-- Widget ends -->
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+	$().ready(function() {
+		$('#upload').click(function() {
+			location.href = '/photos/upload'
+		});
+	});
+</script>
+{% endblock %}
