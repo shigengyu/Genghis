@@ -11,12 +11,13 @@ ADMINS = (
 MANAGERS = ADMINS
 
 GENGHIS_BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))), os.pardir)
+GENGHIS_DATABASE_DIR = os.environ.get('GENGHIS_DATABASE_DIR', GENGHIS_BASE_DIR)
 DATABASE_FILE_NAME = 'genghis.db'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(GENGHIS_BASE_DIR, DATABASE_FILE_NAME),  # Or path to database file if using sqlite3.
+        'NAME': os.path.join(GENGHIS_DATABASE_DIR, DATABASE_FILE_NAME),  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
