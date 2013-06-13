@@ -2,8 +2,6 @@ from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 from genghis.settings import ADMINS
 from django.contrib.auth.models import User
 
-admin_email = ADMINS[0][1]
-
 class RequireLogin(object):
     
     def __init__(self, func):
@@ -32,4 +30,4 @@ class RequireAdmin(RequireLogin):
         return result
 
 def is_admin(user):
-    return user.is_authenticated() and user.email == admin_email
+    return user.is_authenticated() and user.is_superuser()
