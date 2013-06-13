@@ -89,7 +89,7 @@
 				</ul>
 				
 				<!-- Admin -->
-				{% if request.user.is_authenticated and is_admin %}
+				{% if request.user.is_authenticated and request.user.is_superuser%}
 				<ul class="nav pull-right">
 					<li class="dropdown pull-right">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -101,6 +101,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="/article/create">Create Article</a></li>
 							<li><a href="/article/tag">Manage Tags</a></li>
+							<li><a href="/files/upload">Upload File</a></li>
 						</ul>
 					</li>
 				</ul>
