@@ -1,10 +1,12 @@
-from time import time
+from datetime import datetime
 from django.db import models
 from django.db.models.base import Model
 from django.contrib.auth.models import User
 
 def get_file_upload_name(instance, filename):
-    filename = "files/%s_%s" % (str(time()).replace('.', '_'), filename)
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S%f')
+    filename = filename.replace(' ', '_')
+    filename = "files/%s_%s" % (timestamp, filename)
     return filename
 
 class File(Model):

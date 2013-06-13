@@ -53,8 +53,8 @@ USE_L10N = True
 USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.environ.get('GENGHIS_MEDIA_ROOT', os.path.join(GENGHIS_BASE_DIR, os.pardir, 'uploaded'))
+# This environment variable is specified in prod only. This should be a sub directory of STATIC_ROOT in prod.
+MEDIA_ROOT = os.environ.get('GENGHIS_MEDIA_ROOT', os.path.join(GENGHIS_BASE_DIR, 'static', 'uploaded'))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
