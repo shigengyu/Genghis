@@ -17,6 +17,15 @@ class PhotoList(TemplateView):
         context['path'] = (PathItem('/photos', 'Photos'),)
         return context
 
+class PhotoGallery(TemplateView):
+    template_name = 'photo_gallery.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(PhotoGallery, self).get_context_data(**kwargs)
+        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('date').select_related()
+        context['path'] = (PathItem('/photos', 'Photos'), PathItem('/photos/gallery', 'Gallery'))
+        return context
+
 class PhotoUpload(CreateView):
     template_name = 'photo_upload.html'
     form_class = PhotoUploadForm

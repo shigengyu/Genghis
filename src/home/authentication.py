@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseRedirect, HttpResponseForbidden
-from genghis.settings import ADMINS
+from genghis.settings import ADMINS, GENGHIS_ENVIRONMENT
 from django.contrib.auth.models import User
 
 class RequireLogin(object):
@@ -30,4 +30,4 @@ class RequireAdmin(RequireLogin):
         return result
 
 def is_admin(user):
-    return user.is_authenticated and user.is_superuser
+    return user.is_authenticated and (user.is_superuser or GENGHIS_ENVIRONMENT == 'dev')

@@ -1,11 +1,12 @@
 from django.forms.models import ModelForm
 from photos.models import Photo
 from django.forms.widgets import TextInput, Textarea, FileInput, DateInput
+from genghis import settings
 
 class PhotoUploadForm(ModelForm):
     class Meta:
         model = Photo
-        fields = ('name', 'description', 'source', 'date', 'attachment')
+        fields = ('name', 'description', 'source', 'date', 'attachment', 'display_in_gallery')
         widgets = {
             'name': TextInput(attrs={'class':'span11'}),
             'description': Textarea(attrs={'class':'span11', 'rows': '10'}),
@@ -17,7 +18,7 @@ class PhotoUploadForm(ModelForm):
 class PhotoUpdateForm(ModelForm):
     class Meta:
         model = Photo
-        fields = ('name', 'description', 'source', 'date')
+        fields = ('name', 'description', 'source', 'date', 'display_in_gallery')
         widgets = {
             'name': TextInput(attrs={'class':'span11'}),
             'description': Textarea(attrs={'class':'span11', 'rows': '10'}),

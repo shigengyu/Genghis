@@ -22,7 +22,7 @@
 			<div class="widget-content">
 				<div class="padd">
 
-					<form class="form-horizontal" action="/files/update/{{ id }}/" method="post">
+					<form class="form-horizontal" action="/photos/update/{{ id }}/" method="post">
 
 						<!-- Name -->
 						<div class="control-group">
@@ -46,6 +46,12 @@
 						<div class="control-group">
 							<label class="control-label" for="content">Date</label>
 							<div class="controls">{{ form.date }}</div>
+						</div>
+						
+						<!-- Display in Gallery -->
+						<div class='file-checkbox'>
+							<label class="control-label" for="content">Display in Gallery</label>
+							<div class="controls">{{ form.display_in_gallery }}</div>
 						</div>
 
 						<hr />
@@ -89,7 +95,7 @@
 <script>
 	$().ready(function() {
 		$('#cancel').click(function() {
-			location.href = '/files'
+			location.href = '/photos'
 		});
 	});
 </script>

@@ -10,10 +10,8 @@
 
 {% block content %}
 
-<button id="upload" class="btn btn-warning">Upload New</button>
-
 <div class="row-fluid">
-	<div class="span9">
+	<div class="span12">
 		<div class="widget wviolet">
 			<!-- Widget head -->
 			<div class="widget-head">
@@ -23,23 +21,36 @@
 	
 			<!-- Widget content -->
 			<div class="widget-content">
-				<div class="padd">
-					<div class="gallery">
-						{% for photo in photos %}
-						<div class="gallery-item">
-							<!-- Full size image link in anchor tag. Thumbnail link in image tag. -->
-							<a href="{% static 'uploaded' %}/{{ photo.attachment }}" class="prettyPhoto[pp_gal]">
-								<img src="{% static 'uploaded' %}/{{ photo.attachment }}" alt="{{ photo.name }}" />
-							</a>
-							<div class="gallery-text">
-								{{ photo.name }} <br />
-								{{ photo.description }} <br />
-								{{ photo.source }} on {{ photo.date }}
-							</div>
-						</div>
-						{% endfor %}
-					</div>
-				</div>
+				<table id="tags" class="table table-bordered">
+				<tr>
+					<th class="span1"><center>ID</center></th>
+					<th class="span1">Name</th>
+					<th class="span2">Description</th>
+					<th class="span1">Source</th>
+					<th class="span1">Date</th>
+					<th class="span1">Upload By</th>
+					<th class="span2">Upload Time</th>
+					<th class="span1">Link</th>
+					<th class="span2">Actions</th>
+				</tr>
+				{% for photo in photos %}
+				<tr>
+					<td>{{ photo.id }}</td>
+					<td>{{ photo.name }}</td>
+					<td>{{ photo.description }}</td>
+					<td>{{ photo.source }}</td>
+					<td>{{ photo.date }}</td>
+					<td>{{ photo.uploaded_by.get_full_name }}</td>
+					<td>{{ photo.upload_date_time }}</td>
+					<td><a href="{% static 'uploaded' %}/{{ file.attachment }}"
+						target="_blank">Download</a></td>
+					<td>
+						<a href="/photos/update/{{ photo.id }}">Update</a> | 
+						<a href="/photos/delete/{{ photo.id }}">Delete</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
 			</div>
 			<div class="widget-foot">
 				<!-- Footer goes here -->
