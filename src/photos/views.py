@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from photos.models import Photo, PhotoTag
 from photos.forms import PhotoUploadForm, PhotoUpdateForm, PhotoTagForm
 from home.models import PathItem
-from home.authentication import RequireAdmin
+from home.authentication import require_admin
 
 class PhotoList(TemplateView):
     template_name = 'photo_list.html'
@@ -33,7 +33,7 @@ class PhotoUpload(CreateView):
     form_class = PhotoUploadForm
     success_url = '/photos'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(PhotoUpload, self).get(request, *args, **kwargs)
     
@@ -42,7 +42,7 @@ class PhotoUpload(CreateView):
         context['path'] = (PathItem('/photos', 'Photos'), PathItem('/photos/upload', 'Upload Photo'))
         return context
 
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         data = form.save(commit=False)
         data.upload_date_time = datetime.now()
@@ -56,7 +56,7 @@ class PhotoUpdate(UpdateView):
     form_class = PhotoUpdateForm
     success_url = '/photos'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(PhotoUpdate, self).get(request, *args, **kwargs)
     
@@ -70,7 +70,7 @@ class PhotoUpdate(UpdateView):
         queryset = Photo.objects.all()
         return queryset
     
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):        
         return super(PhotoUpdate, self).form_valid(form)
 
@@ -79,7 +79,7 @@ class PhotoDelete(DeleteView):
     template_name = 'photo_confirm_delete.html'
     success_url = '/photos'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(PhotoDelete, self).get(request, *args, **kwargs)
     
@@ -94,7 +94,7 @@ class PhotoDelete(DeleteView):
         queryset = Photo.objects.all()
         return queryset
 
-    @RequireAdmin
+    @require_admin
     def delete(self, request, *args, **kwargs):
         return super(PhotoDelete, self).delete(request)
 
@@ -114,7 +114,7 @@ class PhotoTagCreate(CreateView):
     form_class = PhotoTagForm
     success_url = '/photos/tags'
 
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(PhotoTagCreate, self).get(request, *args, **kwargs)
 
@@ -124,7 +124,7 @@ class PhotoTagCreate(CreateView):
         context['path'] = (PathItem('/photos', 'Photos'), PathItem('/photos/tag', 'Tags'), PathItem('/photos/tag/create', 'Create Tag'))
         return context
 
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         data = form.save(commit=False)
         data.save()
@@ -136,7 +136,7 @@ class PhotoTagUpdate(UpdateView):
     form_class = PhotoTagForm
     success_url = '/photos/tags'
 
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(PhotoTagUpdate, self).get(request, *args, **kwargs)
     
@@ -151,7 +151,7 @@ class PhotoTagUpdate(UpdateView):
         queryset = PhotoTag.objects.all()
         return queryset
 
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         return super(PhotoTagUpdate, self).form_valid(form)
 
@@ -161,7 +161,7 @@ class PhotoTagDelete(DeleteView):
     form_class = PhotoTagForm
     success_url = '/photos/tags'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(PhotoTagDelete, self).get(request, *args, **kwargs)
     
@@ -175,6 +175,6 @@ class PhotoTagDelete(DeleteView):
         queryset = PhotoTag.objects.all()
         return queryset
     
-    @RequireAdmin
+    @require_admin
     def delete(self, request, *args, **kwargs):
         return super(PhotoTagDelete, self).delete(request)

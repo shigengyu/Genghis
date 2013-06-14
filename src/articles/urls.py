@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 from articles.views import ArticleList, ArticleDetail, ArticleCreate, ArticleUpdate, ArticleDelete
 from articles.views import ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete
+from articles.views import ArticleCommentCreate
 
 urlpatterns = patterns('',
     url(r'^$', ArticleList.as_view()),
@@ -12,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^tag/create/', ArticleTagCreate.as_view()),
     url(r'^tag/update/(?P<pk>\d+)/$', ArticleTagUpdate.as_view()),
     url(r'^tag/delete/(?P<pk>\d+)/$', ArticleTagDelete.as_view()),
+    url(r'^comments/create/', ArticleCommentCreate.as_view()),
 )

@@ -5,9 +5,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from articles.models import Article, ArticleTag
-from articles.forms import ArticleForm, ArticleTagForm
+from articles.forms import ArticleForm, ArticleTagForm, ArticleCommentForm
 from home.models import PathItem
-from home.authentication import RequireLogin, RequireAdmin
+from home.authentication import require_login, require_admin
 
 ARTICLE_PATH_ITEM = PathItem('/articles', 'Article')
 
@@ -29,6 +29,8 @@ class ArticleDetail(DetailView):
         context = super(ArticleDetail, self).get_context_data(**kwargs)
         context['article'] = self.object
         context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/detail/' + str(self.object.pk), 'Article Detail'))
+        context['comment_action'] = 'create'
+        context['comment_form'] = ArticleCommentForm({'article': self.object})
         return context
 
 
@@ -37,7 +39,7 @@ class ArticleCreate(CreateView):
     form_class = ArticleForm
     success_url = '/articles'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(ArticleCreate, self).get(request, *args, **kwargs)
     
@@ -47,7 +49,7 @@ class ArticleCreate(CreateView):
         context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/create', 'Create Article'))
         return context
 
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         data = form.save(commit=False)
         current_time = datetime.now()
@@ -63,7 +65,7 @@ class ArticleUpdate(UpdateView):
     form_class = ArticleForm
     success_url = '/articles'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(ArticleUpdate, self).get(request, *args, **kwargs)
     
@@ -78,19 +80,22 @@ class ArticleUpdate(UpdateView):
         queryset = Article.objects.all()
         return queryset
     
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         data = self.object
         data.update_date_time = datetime.now()
         return super(ArticleUpdate, self).form_valid(form)
 
+    def get_success_url(self):
+        return '/articles/detail/' + str(self.object.id)
+        
 
 class ArticleDelete(DeleteView):
     template_name = 'article_confirm_delete.html'
     form_class = ArticleForm
     success_url = '/articles'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(ArticleDelete, self).get(request, *args, **kwargs)
     
@@ -105,7 +110,7 @@ class ArticleDelete(DeleteView):
         queryset = Article.objects.all()
         return queryset
 
-    @RequireAdmin
+    @require_admin
     def delete(self, request, *args, **kwargs):
         return super(ArticleDelete, self).delete(request)
 
@@ -125,7 +130,7 @@ class ArticleTagCreate(CreateView):
     form_class = ArticleTagForm
     success_url = '/articles/tag'
 
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(ArticleTagCreate, self).get(request, *args, **kwargs)
 
@@ -135,7 +140,7 @@ class ArticleTagCreate(CreateView):
         context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/tag', 'Tags'), PathItem('/articles/tag/create', 'Create Tag'))
         return context
 
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         data = form.save(commit=False)
         data.save()
@@ -147,7 +152,7 @@ class ArticleTagUpdate(UpdateView):
     form_class = ArticleTagForm
     success_url = '/articles/tag'
 
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(ArticleTagUpdate, self).get(request, *args, **kwargs)
     
@@ -162,7 +167,7 @@ class ArticleTagUpdate(UpdateView):
         queryset = ArticleTag.objects.all()
         return queryset
 
-    @RequireAdmin
+    @require_admin
     def form_valid(self, form):
         return super(ArticleTagUpdate, self).form_valid(form)
 
@@ -172,7 +177,7 @@ class ArticleTagDelete(DeleteView):
     form_class = ArticleTagForm
     success_url = '/articles/tag'
     
-    @RequireAdmin
+    @require_admin
     def get(self, request, *args, **kwargs):
         return super(ArticleTagDelete, self).get(request, *args, **kwargs)
     
@@ -186,6 +191,35 @@ class ArticleTagDelete(DeleteView):
         queryset = ArticleTag.objects.all()
         return queryset
     
-    @RequireAdmin
+    @require_admin
     def delete(self, request, *args, **kwargs):
         return super(ArticleTagDelete, self).delete(request)
+
+
+class ArticleCommentCreate(CreateView):
+    template_name = 'article_comment_form.html'
+    form_class = ArticleCommentForm
+    success_url = '/articles'
+
+    @require_login
+    def get(self, request, *args, **kwargs):
+        return super(ArticleCommentCreate, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleCommentCreate, self).get_context_data(**kwargs)
+        context['action'] = 'create'
+        return context
+
+    @require_login
+    def post(self, request, *args, **kwargs):
+        return super(ArticleCommentCreate, self).post(request, *args, **kwargs)
+
+    @require_login
+    def form_valid(self, form):
+        data = form.save(commit=False)
+        current_time = datetime.now()
+        data.create_date_time = current_time
+        data.update_date_time = current_time
+        data.author = self.request.user
+        data.save()
+        return super(ArticleCommentCreate, self).form_valid(form)

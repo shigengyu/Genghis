@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from social_auth.models import UserSocialAuth
 from genghis.settings import ADMINS, GENGHIS_ENVIRONMENT
 
-class RequireLogin(object):
+class require_login(object):
     
     def __init__(self, func):
         self.func = func
@@ -21,7 +21,7 @@ class RequireLogin(object):
         self.instance = instance
         return self.__call__
 
-class RequireAdmin(RequireLogin):
+class require_admin(require_login):
     
     def __call__(self, *args, **kwargs):
         if (not is_admin(self.instance.request.user)):

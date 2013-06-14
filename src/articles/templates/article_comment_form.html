@@ -1,0 +1,11 @@
+<form class="form-horizontal" action="/articles/comments/{{ comment_action }}/{% if comment_id %}{{ comment_id }}/{% endif %}"
+	method="post">
+	
+	{{ comment_form.article }}
+
+	{{ comment_form.content }}
+	<br /><br />
+
+	{% csrf_token %}
+	<button type="submit" class="btn btn-info">Add Comment</button>
+</form>

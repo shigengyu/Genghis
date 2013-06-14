@@ -28,8 +28,8 @@ class Article(Model):
 
 class ArticleComment(Model):
     article = models.ForeignKey(Article)
-    subject = models.CharField(max_length=256)
     content = models.TextField()
+    author = models.ForeignKey(User)
     create_date_time = models.DateTimeField(auto_now_add=True)
     update_date_time = models.DateTimeField(auto_now=True)
     

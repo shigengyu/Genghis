@@ -1,6 +1,6 @@
 from django.forms.models import ModelForm
-from articles.models import Article, ArticleTag
-from django.forms.widgets import TextInput, Textarea, SelectMultiple
+from articles.models import Article, ArticleTag, ArticleComment
+from django.forms.widgets import TextInput, Textarea, SelectMultiple, HiddenInput
 
 class ArticleForm(ModelForm):
     class Meta:
@@ -21,4 +21,19 @@ class ArticleTagForm(ModelForm):
         widgets = {
             'name': TextInput(attrs={'class':'span5'}),
             'display_name': TextInput(attrs={'class':'span5'}),
+        }
+
+class ArticleCommentForm(ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(ArticleCommentForm, self).__init__(*args, **kwargs)
+        article = kwargs.get('article')
+        self.fields['article'].initial = article
+    
+    class Meta:
+        model = ArticleComment
+        fields = ('article', 'content',)
+        widgets = {
+            'article': HiddenInput(),
+            'content': Textarea(attrs={'class':'span12', 'rows': '5'}),
         }
