@@ -91,7 +91,7 @@
 				</ul>
 				
 				<!-- Admin -->
-				{% if request.user.is_authenticated %}
+				{% if is_superuser %}
 				<ul class="nav pull-right">
 					<li class="dropdown pull-right">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
