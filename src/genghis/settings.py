@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     
     'home',
-    'article',
+    'articles',
     'photos',
     'files',
     'about',
@@ -176,6 +176,8 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_TEMPLATE_CONTEXT_PROCESSORS + (
     'social_auth.context_processors.social_auth_backends',
     'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
+    'home.authentication.populate_is_superuser',
+    'home.authentication.populate_social_auth_backend',
 )
 
 

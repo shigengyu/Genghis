@@ -1,6 +1,7 @@
 from django.http.response import HttpResponseRedirect, HttpResponseForbidden
-from genghis.settings import ADMINS, GENGHIS_ENVIRONMENT
 from django.contrib.auth.models import User
+from social_auth.models import UserSocialAuth
+from genghis.settings import ADMINS, GENGHIS_ENVIRONMENT
 
 class RequireLogin(object):
     
@@ -33,3 +34,24 @@ def is_admin(user):
     authenticated = user.is_authenticated()
     is_superuser = user.is_superuser or GENGHIS_ENVIRONMENT == 'dev'
     return authenticated and is_superuser
+
+def populate_is_superuser(request):
+    user = request.user
+    authenticated = hasattr(user, 'is_authenticated') and user.is_authenticated()
+    is_superuser = authenticated and request.user.is_superuser
+    if GENGHIS_ENVIRONMENT == 'dev':
+        is_superuser = authenticated
+    return {'is_superuser': is_superuser }
+
+def populate_social_auth_backend(request):
+    associated = None
+    associated_name = None
+    user = request.user
+    if hasattr(user, 'is_authenticated') and user.is_authenticated():
+        associated = UserSocialAuth.get_social_auth_for_user(user)
+    if associated:
+        for name in ['Google', 'Facebook', 'Linkedin', 'Flickr']:
+            if name in str(associated):
+                associated_name = name
+                break;
+    return {'associated_auth_backend': associated_name }

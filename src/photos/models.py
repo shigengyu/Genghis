@@ -3,6 +3,13 @@ from django.db import models
 from django.db.models.base import Model
 from django.contrib.auth.models import User
 
+class PhotoTag(Model):
+    name = models.CharField(max_length=20)
+    display_name = models.CharField(max_length=50)
+    
+    def __unicode__(self):
+        return self.name
+
 def get_file_upload_name(instance, filename):
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     filename = filename.replace(' ', '_')
@@ -18,6 +25,7 @@ class Photo(Model):
     uploaded_by = models.ForeignKey(User)
     upload_date_time = models.DateTimeField()
     display_in_gallery = models.BooleanField()
+    tags = models.ManyToManyField(PhotoTag, blank=True, null=True)
     
     def __unicode__(self):
         return self.name

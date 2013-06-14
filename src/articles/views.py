@@ -4,12 +4,12 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
-from article.models import Article, ArticleTag
-from article.forms import ArticleForm, ArticleTagForm
+from articles.models import Article, ArticleTag
+from articles.forms import ArticleForm, ArticleTagForm
 from home.models import PathItem
 from home.authentication import RequireLogin, RequireAdmin
 
-ARTICLE_PATH_ITEM = PathItem('/article', 'Article')
+ARTICLE_PATH_ITEM = PathItem('/articles', 'Article')
 
 class ArticleList(TemplateView):
     template_name = 'article_list.html'
@@ -28,14 +28,14 @@ class ArticleDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ArticleDetail, self).get_context_data(**kwargs)
         context['article'] = self.object
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/detail/' + str(self.object.pk), 'Article Detail'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/detail/' + str(self.object.pk), 'Article Detail'))
         return context
 
 
 class ArticleCreate(CreateView):
     template_name = 'article_form.html'
     form_class = ArticleForm
-    success_url = '/article'
+    success_url = '/articles'
     
     @RequireAdmin
     def get(self, request, *args, **kwargs):
@@ -44,14 +44,11 @@ class ArticleCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super(ArticleCreate, self).get_context_data(**kwargs)
         context['action'] = 'create'
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/create', 'Create Article'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/create', 'Create Article'))
         return context
 
     @RequireAdmin
     def form_valid(self, form):
-        if (not self.request.user.is_authenticated()):
-            return HttpResponseRedirect('/home/login')
-        
         data = form.save(commit=False)
         current_time = datetime.now()
         data.create_date_time = current_time
@@ -64,7 +61,7 @@ class ArticleCreate(CreateView):
 class ArticleUpdate(UpdateView):
     template_name = 'article_form.html'
     form_class = ArticleForm
-    success_url = '/article'
+    success_url = '/articles'
     
     @RequireAdmin
     def get(self, request, *args, **kwargs):
@@ -74,7 +71,7 @@ class ArticleUpdate(UpdateView):
         context = super(ArticleUpdate, self).get_context_data(**kwargs)
         context['action'] = 'update'
         context['id'] = self.object.pk
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/update/' + str(self.object.pk), 'Update Article'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/update/' + str(self.object.pk), 'Update Article'))
         return context
     
     def get_queryset(self):
@@ -91,7 +88,7 @@ class ArticleUpdate(UpdateView):
 class ArticleDelete(DeleteView):
     template_name = 'article_confirm_delete.html'
     form_class = ArticleForm
-    success_url = '/article'
+    success_url = '/articles'
     
     @RequireAdmin
     def get(self, request, *args, **kwargs):
@@ -101,7 +98,7 @@ class ArticleDelete(DeleteView):
         context = super(ArticleDelete, self).get_context_data(**kwargs)
         context['id'] = self.object.pk
         context['article'] = self.object
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/delete/' + str(self.object.pk), 'Confirm Delete Article'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/delete/' + str(self.object.pk), 'Confirm Delete Article'))
         return context
     
     def get_queryset(self):
@@ -119,14 +116,14 @@ class ArticleTagList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ArticleTagList, self).get_context_data(**kwargs)
         context['article_tags'] = ArticleTag.objects.order_by('display_name')
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/tag', 'Tags'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/tag', 'Tags'))
         return context
 
 
 class ArticleTagCreate(CreateView):
     template_name = 'article_tag_form.html'
     form_class = ArticleTagForm
-    success_url = '/article/tag'
+    success_url = '/articles/tag'
 
     @RequireAdmin
     def get(self, request, *args, **kwargs):
@@ -135,7 +132,7 @@ class ArticleTagCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super(ArticleTagCreate, self).get_context_data(**kwargs)
         context['action'] = 'create'
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/tag', 'Tags'), PathItem('/article/tag/create', 'Create Tag'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/tag', 'Tags'), PathItem('/articles/tag/create', 'Create Tag'))
         return context
 
     @RequireAdmin
@@ -148,7 +145,7 @@ class ArticleTagCreate(CreateView):
 class ArticleTagUpdate(UpdateView):
     template_name = 'article_tag_form.html'
     form_class = ArticleTagForm
-    success_url = '/article/tag'
+    success_url = '/articles/tag'
 
     @RequireAdmin
     def get(self, request, *args, **kwargs):
@@ -158,7 +155,7 @@ class ArticleTagUpdate(UpdateView):
         context = super(ArticleTagUpdate, self).get_context_data(**kwargs)
         context['action'] = 'update'
         context['id'] = self.object.pk
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/tag', 'Tags'), PathItem('/article/tag/update/' + str(self.object.pk), 'Update Tag'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/tag', 'Tags'), PathItem('/articles/tag/update/' + str(self.object.pk), 'Update Tag'))
         return context
     
     def get_queryset(self):
@@ -173,7 +170,7 @@ class ArticleTagUpdate(UpdateView):
 class ArticleTagDelete(DeleteView):
     template_name = 'article_tag_confirm_delete.html'
     form_class = ArticleTagForm
-    success_url = '/article/tag'
+    success_url = '/articles/tag'
     
     @RequireAdmin
     def get(self, request, *args, **kwargs):
@@ -182,7 +179,7 @@ class ArticleTagDelete(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(ArticleTagDelete, self).get_context_data(**kwargs)
         context['tag'] = self.object
-        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/article/tag', 'Tags'), PathItem('/article/tag/delete/' + str(self.object.pk), 'Confirm Delete Article Tag'))
+        context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/tag', 'Tags'), PathItem('/articles/tag/delete/' + str(self.object.pk), 'Confirm Delete Article Tag'))
         return context
     
     def get_queryset(self):

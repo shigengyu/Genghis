@@ -22,7 +22,7 @@
 			<div class="widget-content">
 				<div class="padd">
 
-					<form class="form-horizontal" action="/article/tag/{{ action }}/{% if id %}{{ id }}/{% endif %}"
+					<form class="form-horizontal" action="/articles/tag/{{ action }}/{% if id %}{{ id }}/{% endif %}"
 						method="post">
 						
 						<h6>Contents</h6>
@@ -61,7 +61,7 @@
 <script>
 	$().ready(function() {
 		$('.cancel').each(function(index, element) {
-			var url = '/article/tag/';
+			var url = '/articles/tag/';
 			$(this).click(function() {
 				location.href = url;
 			});

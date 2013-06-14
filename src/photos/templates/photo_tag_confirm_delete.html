@@ -1,17 +1,21 @@
-{% extends "base.html" %} {% block head %}
+{% extends "base.html" %}
+
+{% block head %}
 <h2 class="pull-left">
 	Article <span class="page-meta">Confirm Delete</span>
 </h2>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 
 <div class="row-fluid">
 	<div class="span12">
 		<h6>
-			Are you sure to delete article tag <span class="red"><strong>{{ tag.name }}</strong></span> ?
+			Are you sure to delete photo tag <span class="red"><strong>{{ tag.name }}</strong></span> ?
 		</h6>
 		<hr />
 		
-		<form class="form-horizontal" action="/article/tag/delete/{{ tag.id }}/"
+		<form class="form-horizontal" action="/photos/tags/delete/{{ tag.id }}/"
 			method="post">
 
 			{% csrf_token %}
@@ -28,7 +32,7 @@
 <script>
 	$().ready(function() {
 		$('#cancel').click(function() {
-			location.href = '/article/tag'
+			location.href = '/photos/tags'
 		});
 	});
 </script>

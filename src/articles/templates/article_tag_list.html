@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block head %}
+<h2 class="pull-left">
+	Article Tags <span class="page-meta">Manage</span>
+</h2>
+{% endblock %} {% block content %}
+<div class="row-fluid">
+	<div class="widget worange">
+		<!-- Widget head -->
+		<div class="widget-head">
+			<div class="pull-left">Article Tag List</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<!-- Widget content -->
+		<div class="widget-content referrer">
+			<table id="tags" class="table table-bordered">
+				<tr>
+					<th class="span1"><center>ID</center></th>
+					<th class="span3">Name</th>
+					<th class="span5">Display Name</th>
+					<th class="span5">Actions</th>
+				</tr>
+				{% for tag in article_tags %}
+				<tr>
+					<td><center>{{ tag.id }}</center></td>
+					<td>{{ tag.name }}</td>
+					<td>{{ tag.display_name }}</td>
+					<td>
+						<a href="/articles/tag/update/{{ tag.id }}">Update</a> |
+						<a href="/articles/tag/delete/{{ tag.id }}">Delete</a> 
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<!-- Widget ends -->
+
+	<button id="create" class="btn btn-info">Create</button>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+	$().ready(function() {
+		$('#create').click(function() {
+			location.href = '/articles/tag/create'
+		});
+	});
+</script>
+{% endblock %}

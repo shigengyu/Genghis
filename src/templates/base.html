@@ -41,7 +41,7 @@
 					<li class="dropdown pull-right">					
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							{% if request.user.is_authenticated %}
-								{{ request.user.get_full_name }}
+								{{ request.user.get_full_name }} ({{ associated_auth_backend }})
 							{% else %}
 								Login
 							{% endif %}
@@ -91,7 +91,7 @@
 				</ul>
 				
 				<!-- Admin -->
-				{% if request.user.is_authenticated and request.user.is_superuser%}
+				{% if request.user.is_authenticated %}
 				<ul class="nav pull-right">
 					<li class="dropdown pull-right">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -101,11 +101,12 @@
 						
 						<!-- Dropdown menu -->
 						<ul class="dropdown-menu">
-							<li><a href="/article/create">Create Article</a></li>
-							<li><a href="/article/tag">Manage Tags</a></li>
+							<li><a href="/articles/create">Create Article</a></li>
+							<li><a href="/articles/tag">Manage Article Tags</a></li>
 							<li><a href="/files/upload">Upload File</a></li>
 							<li><a href="/photos">Manage Photo</a></li>
 							<li><a href="/photos/upload">Upload Photo</a></li>
+							<li><a href="/photos/tags">Manage Photo Tags</a></li>
 						</ul>
 					</li>
 				</ul>

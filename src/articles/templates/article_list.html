@@ -17,12 +17,12 @@
 			<!-- Widget head -->
 			<div class="widget-head">
 				<div class="pull-left">
-					<a class="bblue" href="/article/detail/{{ article.id }}">{{ article.subject }}</a>
+					<a class="bblue" href="/articles/detail/{{ article.id }}">{{ article.subject }}</a>
 				</div>
 				<div class="widget-icons pull-right">					
 					{% if article.author == request.user %}
-						<a href="/article/update/{{ article.id }}"><i class="icon-edit"></i></a>
-						<a href="/article/delete/{{ article.id }}"><i class="icon-remove"></i></a>
+						<a href="/articles/update/{{ article.id }}"><i class="icon-edit"></i></a>
+						<a href="/articles/delete/{{ article.id }}"><i class="icon-remove"></i></a>
 					{% endif %}
 					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
 				</div>

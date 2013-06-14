@@ -27,8 +27,7 @@
 					<th class="span3">Description</th>
 					<th class="span1">Upload By</th>
 					<th class="span2">Upload Time</th>
-					<th class="span1">Link</th>
-					<th class="span2">Actions</th>
+					<th class="span3">Actions</th>
 				</tr>
 				{% for file in files %}
 				<tr>
@@ -37,11 +36,12 @@
 					<td>{{ file.description }}</td>
 					<td>{{ file.uploaded_by.get_full_name }}</td>
 					<td>{{ file.upload_date_time }}</td>
-					<td><a href="{% static 'uploaded' %}/{{ file.attachment }}"
-						target="_blank">Download</a></td>
 					<td>
-						<a href="/files/update/{{ file.id }}">Update</a> | 
-						<a href="/files/delete/{{ file.id }}">Delete</a>
+						<a href="{% static 'uploaded' %}/{{ file.attachment }}" target="_blank">Download</a>
+						{% if is_superuser %}
+						| <a href="/files/update/{{ file.id }}">Update</a>
+						| <a href="/files/delete/{{ file.id }}">Delete</a>
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %}

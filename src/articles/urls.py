@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
-from article.views import ArticleList, ArticleDetail, ArticleCreate, ArticleUpdate, ArticleDelete
-from article.views import ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete
+from articles.views import ArticleList, ArticleDetail, ArticleCreate, ArticleUpdate, ArticleDelete
+from articles.views import ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete
 
 urlpatterns = patterns('',
     url(r'^$', ArticleList.as_view()),

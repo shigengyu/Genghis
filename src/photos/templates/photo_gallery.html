@@ -32,7 +32,12 @@
 							<div class="gallery-text">
 								{{ photo.name }} <br />
 								{{ photo.description }} <br />
-								{{ photo.source }} on {{ photo.date }}
+								{{ photo.source }} on {{ photo.date }} <br />
+								{% if photo.tags.all %}
+									{% for tag in photo.tags.all %}
+										<span class="label label-success">{{ tag.display_name }}</span>
+									{% endfor %}
+								{% endif %}
 							</div>
 						</div>
 						{% endfor %}

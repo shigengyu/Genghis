@@ -1,5 +1,5 @@
 from django.forms.models import ModelForm
-from article.models import Article, ArticleTag
+from articles.models import Article, ArticleTag
 from django.forms.widgets import TextInput, Textarea, SelectMultiple
 
 class ArticleForm(ModelForm):

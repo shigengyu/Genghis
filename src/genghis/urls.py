@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', include('home.urls')),
     url(r'^home/', include('home.urls')),
-    url(r'^article/', include('article.urls')),
+    url(r'^articles/', include('articles.urls')),
     url(r'^photos/', include('photos.urls')),
     url(r'^files/', include('files.urls')),
     url(r'^about/', include('about.urls')),
