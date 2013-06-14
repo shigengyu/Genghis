@@ -35,13 +35,13 @@ def is_admin(user):
     is_superuser = user.is_superuser or GENGHIS_ENVIRONMENT == 'dev'
     return authenticated and is_superuser
 
-def populate_is_superuser(request):
+def populate_is_admin(request):
     user = request.user
     authenticated = hasattr(user, 'is_authenticated') and user.is_authenticated()
-    is_superuser = authenticated and request.user.is_superuser
+    is_admin = authenticated and request.user.is_superuser
     if GENGHIS_ENVIRONMENT == 'dev':
-        is_superuser = authenticated
-    return {'is_superuser': is_superuser }
+        is_admin = authenticated
+    return {'is_admin': is_admin, 'environment': GENGHIS_ENVIRONMENT }
 
 def populate_social_auth_backend(request):
     associated = None

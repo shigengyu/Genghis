@@ -18,8 +18,18 @@ class ArticleList(TemplateView):
         context = super(ArticleList, self).get_context_data(**kwargs)
         context['articles'] = Article.objects.order_by('-create_date_time').select_related()
         context['path'] = (ARTICLE_PATH_ITEM,)
+        context['tags'] = ArticleTag.objects
         return context
 
+class ArticleListByTag(TemplateView):
+    template_name = 'article_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ArticleListByTag, self).get_context_data(**kwargs)
+        context['articles'] = Article.objects.filter(tags__name = self.kwargs['slug']).select_related()
+        context['path'] = (ARTICLE_PATH_ITEM,)
+        context['tags'] = ArticleTag.objects
+        return context
 
 class ArticleDetail(DetailView):
     template_name = 'article_detail.html'
@@ -32,7 +42,6 @@ class ArticleDetail(DetailView):
         context['comment_action'] = 'create'
         context['comment_form'] = ArticleCommentForm({'article': self.object})
         return context
-
 
 class ArticleCreate(CreateView):
     template_name = 'article_form.html'

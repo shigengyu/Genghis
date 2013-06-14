@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, url
-from articles.views import ArticleList, ArticleDetail, ArticleCreate, ArticleUpdate, ArticleDelete
+from articles.views import ArticleList, ArticleListByTag, ArticleDetail, ArticleCreate, ArticleUpdate, ArticleDelete
 from articles.views import ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete
 from articles.views import ArticleCommentCreate
 
 urlpatterns = patterns('',
     url(r'^$', ArticleList.as_view()),
+    url(r'^bytag/(?P<slug>[-\w]+)/$', ArticleListByTag.as_view()),
     url(r'^detail/(?P<pk>\d+)/$', ArticleDetail.as_view()),
     url(r'^create/$', ArticleCreate.as_view()),
     url(r'^update/(?P<pk>\d+)/$', ArticleUpdate.as_view()),

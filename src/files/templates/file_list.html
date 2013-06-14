@@ -38,7 +38,7 @@
 					<td>{{ file.upload_date_time }}</td>
 					<td>
 						<a href="{% static 'uploaded' %}/{{ file.attachment }}" target="_blank">Download</a>
-						{% if is_superuser %}
+						{% if is_admin %}
 						| <a href="/files/update/{{ file.id }}">Update</a>
 						| <a href="/files/delete/{{ file.id }}">Delete</a>
 						{% endif %}

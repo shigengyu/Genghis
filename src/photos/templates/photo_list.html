@@ -43,7 +43,7 @@
 					<td>{{ photo.upload_date_time }}</td>
 					<td>
 						<a href="{% static 'uploaded' %}/{{ photo.attachment }}" target="_blank">View</a>
-						{% if is_superuser %}
+						{% if is_admin %}
 						| <a href="/photos/update/{{ photo.id }}">Update</a>
 						| <a href="/photos/delete/{{ photo.id }}">Delete</a>
 						{% endif %}
