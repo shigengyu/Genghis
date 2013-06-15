@@ -143,15 +143,17 @@ $().ready(function() {
 	
 	$('.delete-comment').each(function() {
 		$(this).click(function() {
-			var id = $(this).attr('id').toString().substr(15);
-			var url = '/articles/comments/delete/' + id + '/';
-			$.post(url, {'comment_id': id}, function(data) {
-				if (data.success) {
-					$('span#comment-' + id).remove();
-					$('span#comment-actions-' + id).remove();
-					$('hr#comment-hr-' + id).remove();
-				}
-			});
+			if (confirm('Are you sure to delete the comment?')) {
+				var id = $(this).attr('id').toString().substr(15);
+				var url = '/articles/comments/delete/' + id + '/';
+				$.post(url, {'comment_id': id}, function(data) {
+					if (data.success) {
+						$('span#comment-' + id).remove();
+						$('span#comment-actions-' + id).remove();
+						$('hr#comment-hr-' + id).remove();
+					}
+				});
+			}
 		});
 	});
 	
