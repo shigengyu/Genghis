@@ -8,11 +8,11 @@ class PhotoUploadForm(ModelForm):
         model = Photo
         fields = ('name', 'description', 'source', 'date', 'attachment', 'tags', 'display_in_gallery')
         widgets = {
-            'name': TextInput(attrs={'class':'span11'}),
-            'description': Textarea(attrs={'class':'span11', 'rows': '10'}),
-            'source': TextInput(attrs={'class':'span11'}),
-            'date': DateInput(attrs={'class':'span11'}),
-            'attachment': FileInput(attrs={'class':'span11'})
+            'name': TextInput(attrs={'class':'span12'}),
+            'description': Textarea(attrs={'class':'span12', 'rows': '10'}),
+            'source': TextInput(attrs={'class':'span12'}),
+            'date': DateInput(attrs={'class':'span12', 'data-format':'yyyy-MM-dd', 'readonly': 'readonly'}),
+            'attachment': FileInput(attrs={'class':'span12'})
         }
 
 class PhotoUpdateForm(ModelForm):
@@ -20,10 +20,10 @@ class PhotoUpdateForm(ModelForm):
         model = Photo
         fields = ('name', 'description', 'source', 'date', 'tags', 'display_in_gallery')
         widgets = {
-            'name': TextInput(attrs={'class':'span11'}),
-            'description': Textarea(attrs={'class':'span11', 'rows': '10'}),
-            'source': TextInput(attrs={'class':'span11'}),
-            'date': DateInput(attrs={'class':'span11'}),
+            'name': TextInput(attrs={'class':'span12'}),
+            'description': Textarea(attrs={'class':'span12', 'rows': '10'}),
+            'source': TextInput(attrs={'class':'span12'}),
+            'date': DateInput(attrs={'class':'span12', 'data-format':'yyyy-MM-dd', 'readonly': 'readonly'}),
         }
 
 class PhotoTagForm(ModelForm):
