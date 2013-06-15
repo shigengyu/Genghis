@@ -34,7 +34,22 @@
 						<!-- Content -->
 						<div class="control-group">
 							<label class="control-label" for="content">Content</label>
+							<div class="btn-group" style="margin-left: 20px;">
+								<button class="btn" data-toggle="dropdown">Insert Code<span class="caret"></span></button>
+								<ul id="syntax-language" class="dropdown-menu">
+									<li><a id="c#">C#</a></li>
+									<li class="divider"></li>
+									<li><a id="java">Java</a></li>
+								</ul>
+							</div>
+							<br /><br />
 							<div class="controls">{{ form.content }}</div>
+						</div>
+						
+						<!-- Content Preview -->
+						<div class="control-group">
+							<label class="control-label" for="content">Preview</label>
+							<div class="controls"><div id="article-preview" class="span12">	</div></div>
 						</div>
 						
 						<!-- Tags -->
@@ -91,6 +106,23 @@
 	$().ready(function() {
 		$('#cancel').click(function() {
 			location.href = '/articles'
+		});
+		
+		$('#id_content').keyup(function() {
+			var html = $('#id_content').val();
+			$('#article-preview').html(html);
+  			$('#article-preview').find('pre').each(function (idx, item) { SyntaxHighlighter.highlight({}, item); });
+		});
+		
+		$('#syntax-language a').each(function() {
+			$(this).click(function() {
+				var alias = $(this).attr('id');
+				var snippet = '<pre class="brush: ' + alias + '">\n\n</pre>';
+				var html = $('#id_content').val();
+				$('#id_content').val(html + snippet);
+				$('#article-preview').html(html + '\n' + snippet);
+	  			$('#article-preview').find('pre').each(function (idx, item) { SyntaxHighlighter.highlight({}, item); });
+			});
 		});
 	});
 </script>

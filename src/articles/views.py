@@ -8,6 +8,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from articles.models import Article, ArticleTag, ArticleComment
 from articles.forms import ArticleForm, ArticleTagForm, ArticleCommentForm
+from articles.util import html_escape
 from home.models import PathItem
 from home.authentication import require_login, require_admin
 from django.utils import simplejson
@@ -43,7 +44,9 @@ class ArticleDetail(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleDetail, self).get_context_data(**kwargs)
-        context['article'] = self.object
+        article = self.object
+        article.content = html_escape(article.content)
+        context['article'] = article
         context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/detail/' + str(self.object.pk), 'Article Detail'))
         context['comment_action'] = 'create'
         context['comment_form'] = ArticleCommentForm({'article': self.object})

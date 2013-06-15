@@ -7,10 +7,10 @@ class ArticleForm(ModelForm):
         model = Article
         fields = ('subject', 'content', 'tags', 'attachments')
         widgets = {
-            'subject': TextInput(attrs={'class':'span11'}),
-            'content': Textarea(attrs={'class':'span11', 'rows': '10'}),
+            'subject': TextInput(attrs={'class':'span12'}),
+            'content': Textarea(attrs={'class':'span12', 'rows': '10'}),
             'tags': SelectMultiple(attrs={'class':'span3'}),
-            'attachments': SelectMultiple(attrs={'class':'span11'}),
+            'attachments': SelectMultiple(attrs={'class':'span12'}),
         }
     
 
