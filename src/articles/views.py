@@ -21,7 +21,10 @@ class ArticleList(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
-        context['articles'] = Article.objects.order_by('-create_date_time').select_related()
+        articles = Article.objects.order_by('-create_date_time').select_related()
+        for article in articles:
+            article.content = html_escape(article.content)
+        context['articles'] = articles
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
         return context
@@ -32,7 +35,10 @@ class ArticleListByTag(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleListByTag, self).get_context_data(**kwargs)
-        context['articles'] = Article.objects.filter(tags__name=self.kwargs['slug']).select_related()
+        articles = Article.objects.filter(tags__name=self.kwargs['slug']).select_related()
+        for article in articles:
+            article.content = html_escape(article.content)
+        context['articles'] = articles
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
         return context

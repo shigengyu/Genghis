@@ -7,76 +7,89 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-	<div class="span9">
-
-		{% for article in articles %}
-
-		<!-- Widget -->
-		<div class="widget wblue">
-			<!-- Widget head -->
-			<div class="widget-head">
-				<div class="pull-left">
-					<a class="bblue" href="/articles/detail/{{ article.id }}">{{ article.subject }}</a>
+			<div class="row-fluid">
+				<div class="span9">
+			
+					{% for article in articles %}
+			
+					<!-- Widget -->
+					<div class="widget wblue">
+						<!-- Widget head -->
+						<div class="widget-head">
+							<div class="pull-left">
+								<a class="bblue" href="/articles/detail/{{ article.id }}">{{ article.subject }}</a>
+							</div>
+							<div class="widget-icons pull-right">					
+								{% if article.author == request.user %}
+									<a href="/articles/update/{{ article.id }}"><i class="icon-edit"></i></a>
+									<a href="/articles/delete/{{ article.id }}"><i class="icon-remove"></i></a>
+								{% endif %}
+								<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+			
+						<!-- Widget content -->
+						<div class="widget-content">
+							<div class="padd">
+								{% if article.tags.all %}
+									{% for tag in article.tags.all %}
+										<span class="label label-success">{{ tag.display_name }}</span>
+									{% endfor %}
+									<hr />
+								{% endif %}
+								
+								<div class="article-content">
+									{{ article.content|safe }}
+								</div>
+							</div>
+						</div>
+						<div class="widget-foot">
+							{% if article.create_date_time  %}
+								Posted by <i>{{ article.author.get_full_name }}</i> on {{ article.create_date_time }}
+							{% endif %}
+							
+							{% if article.update_date_time != article.create_date_time %}
+								&nbsp;&nbsp;Last updated on {{ article.update_date_time }}
+							{% endif %}
+						</div>
+					</div>
+					
+					{% endfor %}
 				</div>
-				<div class="widget-icons pull-right">					
-					{% if article.author == request.user %}
-						<a href="/articles/update/{{ article.id }}"><i class="icon-edit"></i></a>
-						<a href="/articles/delete/{{ article.id }}"><i class="icon-remove"></i></a>
-					{% endif %}
-					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+			
+				<div class="span3">
+					<div class="widget worange">
+						<div class="widget-head">
+							<div class="pull-left">Tags</div>
+							<div class="widget-icons pull-right">
+								<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+			
+						<div class="widget-content">
+							<div class="padd">
+								<a href="/articles">All</a>
+								<hr />
+								{% if tags.all %}
+									{% for tag in tags.all %}
+										<a href="/articles/bytag/{{ tag.name }}">{{ tag.display_name }}</a>&nbsp;&nbsp;&nbsp;
+									{% endfor %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="clearfix"></div>
 			</div>
+{% endblock %}
 
-			<!-- Widget content -->
-			<div class="widget-content">
-				<div class="padd">
-					{% if article.tags.all %}
-						{% for tag in article.tags.all %}
-							<span class="label label-success">{{ tag.display_name }}</span>
-						{% endfor %}
-						<hr />
-					{% endif %}
-					{{ article.content }}
-				</div>
-			</div>
-			<div class="widget-foot">
-				{% if article.create_date_time  %}
-					Posted by <i>{{ article.author.get_full_name }}</i> on {{ article.create_date_time }}
-				{% endif %}
-				
-				{% if article.update_date_time != article.create_date_time %}
-					&nbsp;&nbsp;Last updated on {{ article.update_date_time }}
-				{% endif %}
-			</div>
-		</div>
-		
-		{% endfor %}
-	</div>
-
-	<div class="span3">
-		<div class="widget worange">
-			<div class="widget-head">
-				<div class="pull-left">Tags</div>
-				<div class="widget-icons pull-right">
-					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-
-			<div class="widget-content">
-				<div class="padd">
-					<a href="/articles">All</a>
-					<hr />
-					{% if tags.all %}
-						{% for tag in tags.all %}
-							<a href="/articles/bytag/{{ tag.name }}">{{ tag.display_name }}</a>&nbsp;&nbsp;&nbsp;
-						{% endfor %}
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+{% block script %}
+<script>
+$().ready(function() {
+	$('.article-content').each(function() {
+		$(this).find('pre').each(function (idx, item) { SyntaxHighlighter.highlight({}, item); });
+	});
+});
+</script>
 {% endblock %}
