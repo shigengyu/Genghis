@@ -10,14 +10,15 @@
 
 {% block content %}
 <div class="row-fluid">
-	<div class="span9">
+	<div class="span12">
 
 		<!-- Widget -->
 		<div class="widget wblue">
 			<!-- Widget head -->
 			<div class="widget-head">
+				<input type="hidden" id="article-id" value="{{ article.id }}" />
 				<div class="pull-left">{{ article.subject }}</div>
-				<div class="widget-icons pull-right">					
+				<div class="widget-icons pull-right">
 					{% if article.author == request.user %}
 						<a href="/articles/update/{{ article.id }}"><i class="icon-edit"></i></a>
 						<a href="/articles/delete/{{ article.id }}"><i class="icon-remove"></i></a>
@@ -30,6 +31,12 @@
 			<!-- Widget content -->
 			<div class="widget-content">
 				<div class="padd">
+					{% if article.tags.all %}
+						{% for tag in article.tags.all %}
+							<span class="label label-success">{{ tag.display_name }}</span>
+						{% endfor %}
+						<hr />
+					{% endif %}
 					{{ article.content }}
 					
 					{% if article.attachments.all %}
@@ -56,32 +63,10 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="span3">
-		<div class="widget worange">
-			<div class="widget-head">
-				<div class="pull-left">Tags</div>
-				<div class="widget-icons pull-right">
-					<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-
-			<div class="widget-content">
-				<div class="padd">
-					{% if article.tags.all %}
-						{% for tag in article.tags.all %}
-							{{ tag.display_name }}
-						{% endfor %}
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 
 <div class="row-fluid">
-	<div class="span9">
+	<div class="span12">
 
 		<!-- Widget -->
 		<div class="widget wblue">
@@ -98,8 +83,17 @@
 			<div class="widget-content">
 				<div class="padd">
 					{% for comment in article.articlecomment_set.all %}
-						{{ comment.content }} -- {{ comment.author.get_full_name }} on {{ comment.update_date_time }}
-					<hr />
+						<span id="comment-{{comment.id}}">
+							{{ comment.content|linebreaksbr }}
+							-- <i>{{ comment.author.get_full_name }}</i> on {{ comment.update_date_time }}
+						</span>
+						<span id="comment-actions-{{comment.id}}" class="pull-right">
+							{% if article.author == request.user or is_admin %}
+								<a id="update-comment-{{ comment.id }}" class="article-action update-comment"><i class="icon-edit"></i></a>
+								<a id="delete-comment-{{ comment.id }}" class="article-action delete-comment"><i class="icon-remove"></i></a>
+							{% endif %}
+						</span>
+						<hr id="comment-hr-{{ comment.id }}" />
 					{% endfor %}
 					{% include "article_comment_form.html" %}
 				</div>
@@ -109,4 +103,85 @@
 	</div>
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script>
+
+function setCreateMode() {
+	$('textarea#comment-content').val('');
+	$('input#comment-id').val('');
+	$('button#submit').text('Add Comment');
+	$('button#submit').addClass('btn-info');
+	$('button#submit').removeClass('btn-warning');
+	$('button#cancel').hide();
+}
+
+function setUpdateMode(commentId) {
+	var url = '/articles/comments/detail/' + commentId;
+	$.get(url, function(data) {
+		$('#comment-form').attr('action', '/articles/comments/update/' + data.id + '/');
+		$('textarea#comment-content').val(data.content);
+		$('input#comment-id').val(commentId.toString());
+		$('button#submit').text('Update Comment');
+		$('button#submit').addClass('btn-warning');
+		$('button#submit').removeClass('btn-info');
+		$('button#cancel').show();
+	});
+}
+
+$().ready(function() {
+	$('button#cancel').hide();
+	setCreateMode();
+	
+	$('.update-comment').each(function() {
+		$(this).click(function() {
+			var id = $(this).attr('id').toString().substr(15);
+			setUpdateMode(id);
+		});
+	});
+	
+	$('.delete-comment').each(function() {
+		$(this).click(function() {
+			var id = $(this).attr('id').toString().substr(15);
+			var url = '/articles/comments/delete/' + id + '/';
+			$.post(url, {'comment_id': id}, function(data) {
+				if (data.success) {
+					$('span#comment-' + id).remove();
+					$('span#comment-actions-' + id).remove();
+					$('hr#comment-hr-' + id).remove();
+				}
+			});
+		});
+	});
+	
+	$('button#cancel').click(function() {
+		setCreateMode();
+	});
+	
+	$('button#submit').click(function() {
+		var articleId = $('input#article-id').val();
+		var content = $('textarea#comment-content').val();
+		var commentId = $('input#comment-id').val();
+		if (commentId == '') {
+			// create mode
+			var url = '/articles/comments/create/';
+			$.post(url, {'article_id': articleId, 'content': content}, function(data) {
+				if (data.success) {
+					location.href = '/articles/detail/' + articleId;
+				}
+			});
+		}
+		else {
+			// update mode
+			var url = '/articles/comments/update/' + commentId + '/';
+			$.post(url, {'content': content}, function(data) {
+				if (data.success) {
+					location.href = '/articles/detail/' + articleId;
+				}
+			});
+		}
+	});
+});
+</script>
 {% endblock %}

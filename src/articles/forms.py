@@ -35,5 +35,5 @@ class ArticleCommentForm(ModelForm):
         fields = ('article', 'content',)
         widgets = {
             'article': HiddenInput(),
-            'content': Textarea(attrs={'class':'span12', 'rows': '5'}),
+            'content': Textarea(attrs={'id': 'comment-content', 'class':'span12', 'rows': '5'}),
         }

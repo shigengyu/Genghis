@@ -67,6 +67,8 @@
 
 			<div class="widget-content">
 				<div class="padd">
+					<a href="/articles">All</a>
+					<hr />
 					{% if tags.all %}
 						{% for tag in tags.all %}
 							<a href="/articles/bytag/{{ tag.name }}">{{ tag.display_name }}</a>&nbsp;&nbsp;&nbsp;

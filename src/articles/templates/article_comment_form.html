@@ -1,11 +1,18 @@
-<form class="form-horizontal" action="/articles/comments/{{ comment_action }}/{% if comment_id %}{{ comment_id }}/{% endif %}"
-	method="post">
+<form class="form-horizontal" id="comment-form" action="/articles/comments/create/" method="post">
 	
 	{{ comment_form.article }}
-
+	<input type="hidden" id="comment-id" value="" />
+	
 	{{ comment_form.content }}
 	<br /><br />
 
 	{% csrf_token %}
-	<button type="submit" class="btn btn-info">Add Comment</button>
+	<button type="button" id="submit" class="btn btn-info">
+		{% if comment_action == 'create' %}
+			Add Comment
+		{% elif comment_action == 'update' %}
+			Edit Comment
+		{% endif %}
+	</button>
+	<button type="button" id="cancel" class="btn btn-warning">Cancel</button>
 </form>

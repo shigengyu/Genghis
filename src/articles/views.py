@@ -1,13 +1,17 @@
 from datetime import datetime
-from django.http.response import HttpResponseRedirect
+from django.http.request import HttpRequest
+from django.http.response import HttpResponseRedirect, HttpResponse, \
+    HttpResponseNotFound
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
-from articles.models import Article, ArticleTag
+from articles.models import Article, ArticleTag, ArticleComment
 from articles.forms import ArticleForm, ArticleTagForm, ArticleCommentForm
 from home.models import PathItem
 from home.authentication import require_login, require_admin
+from django.utils import simplejson
+from django.views.decorators.csrf import csrf_exempt
 
 ARTICLE_PATH_ITEM = PathItem('/articles', 'Article')
 
@@ -21,15 +25,17 @@ class ArticleList(TemplateView):
         context['tags'] = ArticleTag.objects
         return context
 
+
 class ArticleListByTag(TemplateView):
     template_name = 'article_list.html'
     
     def get_context_data(self, **kwargs):
         context = super(ArticleListByTag, self).get_context_data(**kwargs)
-        context['articles'] = Article.objects.filter(tags__name = self.kwargs['slug']).select_related()
+        context['articles'] = Article.objects.filter(tags__name=self.kwargs['slug']).select_related()
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
         return context
+
 
 class ArticleDetail(DetailView):
     template_name = 'article_detail.html'
@@ -42,6 +48,7 @@ class ArticleDetail(DetailView):
         context['comment_action'] = 'create'
         context['comment_form'] = ArticleCommentForm({'article': self.object})
         return context
+
 
 class ArticleCreate(CreateView):
     template_name = 'article_form.html'
@@ -205,30 +212,57 @@ class ArticleTagDelete(DeleteView):
         return super(ArticleTagDelete, self).delete(request)
 
 
-class ArticleCommentCreate(CreateView):
-    template_name = 'article_comment_form.html'
-    form_class = ArticleCommentForm
-    success_url = '/articles'
+def get_article_comment(request, *args, **kwargs):
+    
+    if request.is_ajax() and request.method == 'GET':
+        comment_id = kwargs.get('pk')
+        comment = ArticleComment.objects.get(id=comment_id)
+        data = {
+                'id': comment_id,
+                'content': comment.content
+                }
+        return HttpResponse(simplejson.dumps(data), mimetype='application/json')
+    else:
+        return HttpResponseNotFound()
 
-    @require_login
-    def get(self, request, *args, **kwargs):
-        return super(ArticleCommentCreate, self).get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticleCommentCreate, self).get_context_data(**kwargs)
-        context['action'] = 'create'
-        return context
-
-    @require_login
-    def post(self, request, *args, **kwargs):
-        return super(ArticleCommentCreate, self).post(request, *args, **kwargs)
-
-    @require_login
-    def form_valid(self, form):
-        data = form.save(commit=False)
+@csrf_exempt
+def create_article_comment(request, *args, **kwargs):
+    
+    if request.is_ajax() and request.method == 'POST':
+        comment = ArticleComment()
+        comment.article_id = request.POST['article_id']
+        comment.content = request.POST['content']
         current_time = datetime.now()
-        data.create_date_time = current_time
-        data.update_date_time = current_time
-        data.author = self.request.user
-        data.save()
-        return super(ArticleCommentCreate, self).form_valid(form)
+        comment.create_date_time = current_time
+        comment.update_date_time = current_time
+        comment.author = request.user
+        comment.save(force_insert=True)
+        data = {'success': True}
+        return HttpResponse(simplejson.dumps(data), mimetype='application/json')
+    else:
+        return HttpResponseNotFound()
+
+@csrf_exempt
+def update_article_comment(request, *args, **kwargs):
+    
+    if request.is_ajax() and request.method == 'POST':
+        comment_id = kwargs.get('pk')
+        comment = ArticleComment.objects.get(id=comment_id)
+        comment.content = request.POST['content']
+        comment.save()
+        data = {'success': True}
+        return HttpResponse(simplejson.dumps(data), mimetype='application/json')
+    else:
+        return HttpResponseNotFound()
+
+@csrf_exempt
+def delete_article_comment(request, *args, **kwargs):
+    
+    if request.is_ajax() and request.method == 'POST':
+        comment_id = kwargs.get('pk')
+        comment = ArticleComment.objects.get(id=comment_id)
+        comment.delete()
+        data = {'success': True}
+        return HttpResponse(simplejson.dumps(data), mimetype='application/json')
+    else:
+        return HttpResponseNotFound()
