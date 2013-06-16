@@ -91,8 +91,10 @@
 							-- <i>{{ comment.author.get_full_name }}</i> on {{ comment.update_date_time }}
 						</span>
 						<span id="comment-actions-{{comment.id}}" class="pull-right">
-							{% if article.author == request.user or is_admin %}
+							{% if article.author == request.user %}
 								<a id="update-comment-{{ comment.id }}" class="article-action update-comment"><i class="icon-edit"></i></a>
+							{% endif %}
+							{% if article.author == request.user or is_admin %}
 								<a id="delete-comment-{{ comment.id }}" class="article-action delete-comment"><i class="icon-remove"></i></a>
 							{% endif %}
 						</span>

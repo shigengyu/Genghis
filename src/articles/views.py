@@ -1,18 +1,18 @@
 from datetime import datetime
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect, HttpResponse, \
-    HttpResponseNotFound
+    HttpResponseNotFound, HttpResponseForbidden
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
+from django.utils import simplejson
+from django.views.decorators.csrf import csrf_exempt
 from articles.models import Article, ArticleTag, ArticleComment
 from articles.forms import ArticleForm, ArticleTagForm, ArticleCommentForm
 from articles.util import html_escape
 from home.models import PathItem
-from home.authentication import require_login, require_admin
-from django.utils import simplejson
-from django.views.decorators.csrf import csrf_exempt
+from home.authentication import require_login, require_admin, is_admin
 
 ARTICLE_PATH_ITEM = PathItem('/articles', 'Article')
 
@@ -108,6 +108,9 @@ class ArticleUpdate(UpdateView):
     @require_admin
     def form_valid(self, form):
         data = self.object
+        if self.object.author != self.request.user:
+            return HttpResponseForbidden()
+        
         data.update_date_time = datetime.now()
         return super(ArticleUpdate, self).form_valid(form)
 
@@ -137,6 +140,9 @@ class ArticleDelete(DeleteView):
 
     @require_admin
     def delete(self, request, *args, **kwargs):
+        if self.object.author != self.request.user:
+            return HttpResponseForbidden()
+        
         return super(ArticleDelete, self).delete(request)
 
 
@@ -238,6 +244,10 @@ def get_article_comment(request, *args, **kwargs):
 def create_article_comment(request, *args, **kwargs):
     
     if request.is_ajax() and request.method == 'POST':
+        if (not request.user.is_authenticated()):
+            return_url = request.get_full_path()
+            return HttpResponseRedirect('/home/login?next=' + return_url)
+        
         comment = ArticleComment()
         comment.article_id = request.POST['article_id']
         comment.content = request.POST['content']
@@ -249,29 +259,46 @@ def create_article_comment(request, *args, **kwargs):
         data = {'success': True}
         return HttpResponse(simplejson.dumps(data), mimetype='application/json')
     else:
-        return HttpResponseNotFound()
+        return HttpResponseNotAllowed()
 
 @csrf_exempt
 def update_article_comment(request, *args, **kwargs):
     
     if request.is_ajax() and request.method == 'POST':
+        if (not request.user.is_authenticated()):
+            return_url = request.get_full_path()
+            return HttpResponseRedirect('/home/login?next=' + return_url)
+        
         comment_id = kwargs.get('pk')
         comment = ArticleComment.objects.get(id=comment_id)
-        comment.content = request.POST['content']
-        comment.save()
-        data = {'success': True}
+        
+        if (request.user == comment.author):
+            comment.content = request.POST['content']
+            comment.save()
+            data = {'success': True}
+        else:
+            data = {'success': False, 'message': 'You are not the author of the comment'}
         return HttpResponse(simplejson.dumps(data), mimetype='application/json')
     else:
-        return HttpResponseNotFound()
+        return HttpResponseNotAllowed()
 
 @csrf_exempt
 def delete_article_comment(request, *args, **kwargs):
     
     if request.is_ajax() and request.method == 'POST':
+        if (not request.user.is_authenticated()):
+            return_url = request.get_full_path()
+            return HttpResponseRedirect('/home/login?next=' + return_url)
+        
         comment_id = kwargs.get('pk')
         comment = ArticleComment.objects.get(id=comment_id)
-        comment.delete()
-        data = {'success': True}
+        
+        if (request.user == comment.author or is_admin(request.user)):
+            comment.delete()
+            data = {'success': True}
+        else:
+            data = {'success': False, 'message': 'You are not the author of the comment'}
+        
         return HttpResponse(simplejson.dumps(data), mimetype='application/json')
     else:
-        return HttpResponseNotFound()
+        return HttpResponseNotAllowed()
