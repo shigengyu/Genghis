@@ -1,7 +1,7 @@
 import os, inspect
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as DEFAULT_TEMPLATE_CONTEXT_PROCESSORS
 
-DEBUG = os.environ.get('GENGHIS_DEBUG') != 'False'
+DEBUG = True    #os.environ.get('GENGHIS_DEBUG') != 'False'
 TEMPLATE_DEBUG = DEBUG
 
 GENGHIS_ENVIRONMENT = os.environ.get('GENGHIS_ENVIRONMENT', 'dev')
