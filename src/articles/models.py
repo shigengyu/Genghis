@@ -21,6 +21,7 @@ class Article(Model):
     update_date_time = models.DateTimeField()
     tags = models.ManyToManyField(ArticleTag, blank=True, null=True)
     attachments = models.ManyToManyField(File, blank=True, null=True)
+    is_draft = models.BooleanField()
     
     def __unicode__(self):
         return self.subject

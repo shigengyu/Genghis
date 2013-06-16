@@ -33,7 +33,7 @@
 
 						<!-- Content -->
 						<div class="control-group">
-							<label class="control-label" for="content">Content</label>
+							<label class="control-label">Content</label>
 							<div class="btn-group" style="margin-left: 20px;">
 								<button class="btn" data-toggle="dropdown">Insert Code<span class="caret"></span></button>
 								<ul id="syntax-language" class="dropdown-menu">
@@ -53,20 +53,26 @@
 						
 						<!-- Content Preview -->
 						<div class="control-group">
-							<label class="control-label" for="content">Preview</label>
+							<label class="control-label">Preview</label>
 							<div class="controls"><div id="article-preview" class="span12">	</div></div>
 						</div>
 						
 						<!-- Tags -->
 						<div class="control-group">
-							<label class="control-label" for="content">Tags</label>
+							<label class="control-label">Tags</label>
 							<div class="controls">{{ form.tags }}</div>
 						</div>
 						
 						<!-- Attachments -->
 						<div class="control-group">
-							<label class="control-label" for="content">Attachments</label>
+							<label class="control-label">Attachments</label>
 							<div class="controls">{{ form.attachments }}</div>
+						</div>
+						
+						<!-- Is Draft -->
+						<div class="control-group">
+							<label class="control-label">Is Draft</label>
+							<div class="controls">{{ form.is_draft }}</div>
 						</div>
 
 						<hr />

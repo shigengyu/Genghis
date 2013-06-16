@@ -17,7 +17,10 @@
 			<!-- Widget head -->
 			<div class="widget-head">
 				<div class="pull-left">
-					<a class="bblue" href="/articles/detail/{{ article.id }}">{{ article.subject }}</a>
+					<a class="bblue" href="/articles/detail/{{ article.id }}">
+						{% if article.is_draft %}[Draft] {% endif %}
+						{{ article.subject }}
+					</a>
 				</div>
 				<div class="widget-icons pull-right">					
 					{% if article.author == request.user %}

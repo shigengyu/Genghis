@@ -5,7 +5,7 @@ from django.forms.widgets import TextInput, Textarea, SelectMultiple, HiddenInpu
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ('subject', 'content', 'tags', 'attachments')
+        fields = ('subject', 'content', 'tags', 'attachments', 'is_draft')
         widgets = {
             'subject': TextInput(attrs={'class':'span12'}),
             'content': Textarea(attrs={'class':'span12', 'rows': '10'}),

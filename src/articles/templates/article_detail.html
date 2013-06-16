@@ -17,7 +17,10 @@
 			<!-- Widget head -->
 			<div class="widget-head">
 				<input type="hidden" id="article-id" value="{{ article.id }}" />
-				<div class="pull-left">{{ article.subject }}</div>
+				<div class="pull-left">
+					{% if article.is_draft %}[Draft] {% endif %}
+					{{ article.subject }}
+				</div>
 				<div class="widget-icons pull-right">
 					{% if article.author == request.user %}
 						<a href="/articles/update/{{ article.id }}"><i class="icon-edit"></i></a>
