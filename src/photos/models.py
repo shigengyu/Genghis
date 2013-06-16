@@ -21,7 +21,7 @@ class Photo(Model):
     description = models.TextField()
     source = models.CharField(max_length=100)
     date = models.DateField()
-    attachment = models.FileField(upload_to=get_file_upload_name)
+    image = models.ImageField(upload_to=get_file_upload_name)
     uploaded_by = models.ForeignKey(User)
     upload_date_time = models.DateTimeField()
     display_in_gallery = models.BooleanField()

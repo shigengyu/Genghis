@@ -6,13 +6,13 @@ from genghis import settings
 class PhotoUploadForm(ModelForm):
     class Meta:
         model = Photo
-        fields = ('name', 'description', 'source', 'date', 'attachment', 'tags', 'display_in_gallery')
+        fields = ('name', 'description', 'source', 'date', 'image', 'tags', 'display_in_gallery')
         widgets = {
             'name': TextInput(attrs={'class':'span12'}),
             'description': Textarea(attrs={'class':'span12', 'rows': '10'}),
             'source': TextInput(attrs={'class':'span12'}),
             'date': DateInput(attrs={'class':'span12', 'data-format':'yyyy-MM-dd', 'readonly': 'readonly'}),
-            'attachment': FileInput(attrs={'class':'span12'})
+            'image': FileInput(attrs={'class':'span12'})
         }
 
 class PhotoUpdateForm(ModelForm):

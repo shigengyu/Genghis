@@ -1,6 +1,7 @@
 {% extends "file_base.html" %}
 
 {% load staticfiles %}
+{% load thumbnail %}
 
 {% block head %}
 <h2 class="pull-left">
@@ -25,9 +26,12 @@
 					<div class="gallery">
 						{% for photo in photos %}
 						<div class="gallery-item">
+							
 							<!-- Full size image link in anchor tag. Thumbnail link in image tag. -->
-							<a href="{% static 'uploaded' %}/{{ photo.attachment }}" class="prettyPhoto[pp_gal]">
-								<img src="{% static 'uploaded' %}/{{ photo.attachment }}" alt="{{ photo.name }}" />
+							<a href="{% static 'uploaded' %}/{{ photo.image }}" class="prettyPhoto[pp_gal]">
+								{% thumbnail photo.image "200x133" crop="center" as im %}
+								    <img src="{% static 'uploaded' %}/{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ photo.name }}">
+								{% endthumbnail %}
 							</a>
 							<div class="gallery-text">
 								{{ photo.name }} <br />
