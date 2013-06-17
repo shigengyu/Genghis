@@ -43,7 +43,9 @@
 					{% endif %}
 					
 					<div class="article-content">
+						{% autoescape off %}
 						{{ article.content|safe }}
+						{% endautoescape %}
 					</div>
 				</div>
 			</div>

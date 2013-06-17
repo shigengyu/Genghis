@@ -42,7 +42,9 @@
 					{% endif %}
 					
 					<div id="article-content">
+						{% autoescape off %}
 						{{ article.content|safe }}
+						{% endautoescape %}
 					</div>
 					
 					{% if article.attachments.all %}
