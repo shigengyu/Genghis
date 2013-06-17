@@ -10,7 +10,6 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 from articles.models import Article, ArticleTag, ArticleComment
 from articles.forms import ArticleForm, ArticleTagForm, ArticleCommentForm
-from articles.util import html_escape
 from home.models import PathItem
 from home.authentication import require_login, require_admin, is_admin
 
@@ -25,8 +24,6 @@ class ArticleList(TemplateView):
         if not self.request.user.is_authenticated() or not is_admin(self.request.user):
             articles = articles.filter(is_draft=False)
         articles = articles.order_by('-create_date_time').select_related()
-        for article in articles:
-            article.content = html_escape(article.content)
         context['articles'] = articles
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
@@ -39,8 +36,6 @@ class ArticleListByTag(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ArticleListByTag, self).get_context_data(**kwargs)
         articles = Article.objects.filter(tags__name=self.kwargs['slug']).select_related()
-        for article in articles:
-            article.content = html_escape(article.content)
         context['articles'] = articles
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
@@ -54,7 +49,6 @@ class ArticleDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ArticleDetail, self).get_context_data(**kwargs)
         article = self.object
-        article.content = html_escape(article.content)
         context['article'] = article
         context['path'] = (ARTICLE_PATH_ITEM, PathItem('/articles/detail/' + str(self.object.pk), 'Article Detail'))
         context['comment_action'] = 'create'
