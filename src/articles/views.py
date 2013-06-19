@@ -121,7 +121,7 @@ class ArticleDelete(DeleteView):
     success_url = '/articles'
     
     @require_admin
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):        
         return super(ArticleDelete, self).get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
@@ -137,9 +137,6 @@ class ArticleDelete(DeleteView):
 
     @require_admin
     def delete(self, request, *args, **kwargs):
-        if self.object.author != self.request.user:
-            return HttpResponseForbidden()
-        
         return super(ArticleDelete, self).delete(request)
 
 
