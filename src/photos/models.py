@@ -31,6 +31,6 @@ class Photo(Model):
         return self.name
     
     def delete(self, *args, **kwargs):
-        storage, path = self.attachment.storage, self.attachment.path
+        storage, path = self.image.storage, self.image.path
         super(Photo, self).delete(*args, **kwargs)
         storage.delete(path)
