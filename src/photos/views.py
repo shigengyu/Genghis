@@ -23,7 +23,7 @@ class PhotoGallery(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(PhotoGallery, self).get_context_data(**kwargs)
-        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('date').select_related()
+        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('-date').select_related()
         context['tags'] = PhotoTag.objects
         context['path'] = (PathItem('/photos', 'Photos'), PathItem('/photos/gallery', 'Gallery'))
         return context
@@ -33,7 +33,7 @@ class PhotoGalleryByTag(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(PhotoGalleryByTag, self).get_context_data(**kwargs)
-        context['photos'] = Photo.objects.filter(display_in_gallery=True, tags__name=self.kwargs['slug']).order_by('date').select_related()
+        context['photos'] = Photo.objects.filter(display_in_gallery=True, tags__name=self.kwargs['slug']).order_by('-date').select_related()
         context['tags'] = PhotoTag.objects
         context['path'] = (PathItem('/photos', 'Photos'), PathItem('/photos/gallery', 'Gallery'))
         return context
