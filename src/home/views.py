@@ -2,6 +2,8 @@ from django.views.generic.base import TemplateView, View, RedirectView
 from django.http.response import HttpResponseRedirect
 from home.models import PathItem
 from home.authentication import is_admin
+from articles.models import Article
+from photos.models import Photo
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -9,6 +11,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['is_admin'] = is_admin(self.request.user)
+        context['articles'] = Article.objects.order_by('-create_date_time')[:5].select_related()
+        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('date')[:6].select_related()
         return context
 
 class LoginView(TemplateView):
@@ -44,3 +48,6 @@ class WikiRedirectView(RedirectView):
 class MySqlRedirectView(RedirectView):
     def get_redirect_url(self, **kwargs):
         return '/mysql/index.php'
+
+class IconsView(TemplateView):
+    template_name = 'icons.html'

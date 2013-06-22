@@ -4,6 +4,8 @@ from articles.views import ArticleList, ArticleListByTag, ArticleDetail, \
 from articles.views import ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete, \
     get_article_comment, create_article_comment, update_article_comment, delete_article_comment
 
+
+
 urlpatterns = patterns('',
     url(r'^$', ArticleList.as_view()),
     url(r'^bytag/(?P<slug>[-\w]+)/$', ArticleListByTag.as_view()),

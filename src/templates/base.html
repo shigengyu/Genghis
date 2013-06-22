@@ -144,9 +144,11 @@
 
 			<!-- Matter -->
 			<div class="matter">
-				<div class="container-fluid">
-				{% block content %}{% endblock %}
-				</div>
+				{% block content_custom %}
+					<div class="container-fluid">
+					{% block content %}{% endblock %}
+					</div>
+				{% endblock %}
 			</div>
 			<!-- Matter ends -->
 

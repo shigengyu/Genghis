@@ -17,7 +17,7 @@ ARTICLE_PATH_ITEM = PathItem('/articles', 'Article')
 
 class ArticleList(TemplateView):
     template_name = 'article_list.html'
-    
+  
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
         articles = Article.objects
@@ -281,8 +281,7 @@ def delete_article_comment(request, *args, **kwargs):
     
     if request.is_ajax() and request.method == 'POST':
         if (not request.user.is_authenticated()):
-            return_url = request.get_full_path()
-            return HttpResponseRedirect('/home/login?next=' + return_url)
+            data = {'success': False, 'message': 'Please login to delete comment'}
         
         comment_id = kwargs.get('pk')
         comment = ArticleComment.objects.get(id=comment_id)

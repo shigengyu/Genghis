@@ -1444,7 +1444,7 @@ div.gallery-text {
 	}
 }
 
-@media ( min-width : 768px) and (max-width: 979px) {
+@media (min-width : 768px) and (max-width: 979px) {
 	.form {
 		margin: 0px !important;
 	}
