@@ -36,7 +36,12 @@
 					</tr>
 					{% for article in articles %}
 					<tr>
-						<td>{{ article.subject }}</td>
+						<td><a href="/articles/detail/{{article.id}}">
+							{% if article.is_draft %}
+								[Draft]
+							{% endif %}
+							{{ article.subject }}
+						</a></td>
 						<td>{{ article.create_date_time }}</td>
 					</tr>
 					{% endfor %}

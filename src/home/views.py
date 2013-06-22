@@ -11,8 +11,12 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['is_admin'] = is_admin(self.request.user)
-        context['articles'] = Article.objects.order_by('-create_date_time')[:5].select_related()
-        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('date')[:6].select_related()
+        articles = Article.objects.order_by("-create_date_time")
+        if not self.request.user.is_authenticated() or not is_admin(self.request.user):
+            articles = articles.filter(is_draft=False)
+        articles = articles[0:10]
+        context['articles'] = articles.select_related()
+        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('date')[0:8].select_related()
         return context
 
 class LoginView(TemplateView):
