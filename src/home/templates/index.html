@@ -79,7 +79,9 @@
 								</a>
 								<div class="gallery-text">
 									{{ photo.name }} <br />
-									{{ photo.description }} <br />
+									{% if photo.description %}
+										{{ photo.description }} <br />
+									{% endif %}
 									{{ photo.source }} on {{ photo.date }} <br />
 									{% if photo.tags.all %}
 										{% for tag in photo.tags.all %}

@@ -18,7 +18,7 @@ def get_file_upload_name(instance, filename):
 
 class Photo(Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     source = models.CharField(max_length=100)
     date = models.DateField()
     image = models.ImageField(upload_to=get_file_upload_name)
