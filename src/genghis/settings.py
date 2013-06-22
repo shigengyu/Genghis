@@ -139,7 +139,6 @@ INSTALLED_APPS = (
     
     'social_auth',
     'sorl.thumbnail',
-    'south',
 )
 
 # A sample logging configuration. The only tangible logging
