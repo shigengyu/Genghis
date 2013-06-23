@@ -16,7 +16,7 @@ class HomeView(TemplateView):
             articles = articles.filter(is_draft=False)
         articles = articles[0:10]
         context['articles'] = articles.select_related()
-        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('date')[0:8].select_related()
+        context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('-date')[0:8].select_related()
         return context
 
 class LoginView(TemplateView):
