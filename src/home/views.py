@@ -1,4 +1,4 @@
-from django.views.generic.base import TemplateView, View, RedirectView
+from django.views.generic.base import TemplateView, View
 from django.http.response import HttpResponseRedirect
 from home.models import PathItem
 from home.authentication import is_admin
@@ -44,14 +44,6 @@ class LogoutView(View):
         response = HttpResponseRedirect('/')
         response.set_cookie('sessionid', None)
         return response
-
-class WikiRedirectView(RedirectView):
-    def get_redirect_url(self, **kwargs):
-        return '/wiki/doku.php'
-
-class MySqlRedirectView(RedirectView):
-    def get_redirect_url(self, **kwargs):
-        return '/mysql/index.php'
 
 class IconsView(TemplateView):
     template_name = 'icons.html'

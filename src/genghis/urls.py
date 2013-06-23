@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url, static
 from django.conf import settings
-from home.views import WikiRedirectView, MySqlRedirectView
+from genghis.views import WikiRedirectView, MySqlRedirectView
 #from django.contrib import admin
 #admin.autodiscover()
 
