@@ -29,19 +29,20 @@
 		
 				<!-- Widget content -->
 				<div class="widget-content">
-					<table id="tags" class="table table-bordered">
-					{% for article in articles %}
-					<tr>
-						<td><a href="/articles/detail/{{article.id}}">
+					<div class="padd">
+						{% for article in articles %}
+						<a href="/articles/detail/{{article.id}}">
 							{% if article.is_draft %}
 								[Draft]
 							{% endif %}
 							{{ article.subject }}
-						</a></td>
-						<td>{{ article.create_date_time }}</td>
-					</tr>
-					{% endfor %}
-				</table>
+						</a>
+						<span class="pull-right">{{ article.create_date_time }}</span>
+						{% if not forloop.last %}
+							<hr />
+						{% endif %}
+						{% endfor %}
+					</div>
 				</div>
 				<div class="widget-foot">
 					<!-- Footer goes here -->
