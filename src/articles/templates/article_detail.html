@@ -62,11 +62,11 @@
 			
 			<div class="widget-foot">
 				{% if article.create_date_time  %}
-					Posted by <i>{{ article.author.get_full_name }}</i> on {{ article.create_date_time }}
+					Posted by <i>{{ article.author.get_full_name }}</i> on <span class="datetime">{{ article.create_date_time }}</span>
 				{% endif %}
 				
 				{% if article.update_date_time != article.create_date_time %}
-					&nbsp;&nbsp;Last updated on {{ article.update_date_time }}
+					&nbsp;&nbsp;Last updated on <span class="datetime">{{ article.update_date_time }}</span>
 				{% endif %}
 			</div>
 		</div>

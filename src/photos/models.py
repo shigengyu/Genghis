@@ -11,7 +11,7 @@ class PhotoTag(Model):
         return self.name
 
 def get_file_upload_name(instance, filename):
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    timestamp = datetime.utcnow().strftime('%Y%m%d_%H%M%S')
     filename = filename.replace(' ', '_')
     filename = "photos/%s_%s" % (timestamp, filename)
     return filename

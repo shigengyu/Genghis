@@ -40,7 +40,7 @@
 					<td>{{ photo.source }}</td>
 					<td>{{ photo.date }}</td>
 					<td>{{ photo.uploaded_by.get_full_name }}</td>
-					<td>{{ photo.upload_date_time }}</td>
+					<td><span class="datetime">{{ photo.upload_date_time }}</span></td>
 					<td>
 						<a href="{% static 'uploaded' %}/{{ photo.image }}" target="_blank">View</a>
 						{% if is_admin %}

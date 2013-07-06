@@ -74,7 +74,7 @@ class ArticleCreate(CreateView):
     @require_admin
     def form_valid(self, form):
         data = form.save(commit=False)
-        current_time = datetime.now()
+        current_time = datetime.utcnow()
         data.create_date_time = current_time
         data.update_date_time = current_time
         data.author = self.request.user
@@ -108,7 +108,7 @@ class ArticleUpdate(UpdateView):
         if self.object.author != self.request.user:
             return HttpResponseForbidden()
         
-        data.update_date_time = datetime.now()
+        data.update_date_time = datetime.utcnow()
         return super(ArticleUpdate, self).form_valid(form)
 
     def get_success_url(self):
@@ -245,7 +245,7 @@ def create_article_comment(request, *args, **kwargs):
         comment = ArticleComment()
         comment.article_id = request.POST['article_id']
         comment.content = request.POST['content']
-        current_time = datetime.now()
+        current_time = datetime.utcnow()
         comment.create_date_time = current_time
         comment.update_date_time = current_time
         comment.author = request.user

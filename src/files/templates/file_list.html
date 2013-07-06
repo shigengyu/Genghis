@@ -35,7 +35,7 @@
 					<td>{{ file.name }}</td>
 					<td>{{ file.description }}</td>
 					<td>{{ file.uploaded_by.get_full_name }}</td>
-					<td>{{ file.upload_date_time }}</td>
+					<td><span class="datetime">{{ file.upload_date_time }}</span></td>
 					<td>
 						<a href="{% static 'uploaded' %}/{{ file.attachment }}" target="_blank">Download</a>
 						{% if is_admin %}

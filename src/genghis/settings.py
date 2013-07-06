@@ -216,3 +216,5 @@ EMAIL_HOST = 'mail.shigengyu.com'
 EMAIL_HOST_USER = 'me@shigengyu.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
 EMAIL_PORT = 26
+
+DATETIME_FORMAT = 'Y-m-d H:i +0000'

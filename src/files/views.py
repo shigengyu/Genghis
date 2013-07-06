@@ -34,7 +34,7 @@ class FileUpload(CreateView):
     @require_admin
     def form_valid(self, form):
         data = form.save(commit=False)
-        data.upload_date_time = datetime.now()
+        data.upload_date_time = datetime.utcnow()
         data.uploaded_by = self.request.user
         data.save()
         return super(FileUpload, self).form_valid(form)
