@@ -165,7 +165,9 @@
 		$().ready(function() {
 			$('span.datetime').each(function() {
 				var date = new Date($(this).text());
-				$(this).text(date.toLocaleString());
+				if (!isNaN(date)) {
+					$(this).text(date.toLocaleString());
+				}
 				$(this).removeClass('datetime');
 			});
 		});
