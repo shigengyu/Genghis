@@ -245,7 +245,7 @@ def create_article_comment(request, *args, **kwargs):
         comment = ArticleComment()
         comment.article_id = request.POST['article_id']
         comment.content = request.POST['content']
-        current_time = datetime.now()
+        current_time = datetime.utcnow()
         comment.create_date_time = current_time
         comment.update_date_time = current_time
         comment.author = request.user

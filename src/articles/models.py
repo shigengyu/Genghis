@@ -31,8 +31,8 @@ class ArticleComment(Model):
     article = models.ForeignKey(Article)
     content = models.TextField()
     author = models.ForeignKey(User)
-    create_date_time = models.DateTimeField(auto_now_add=True)
-    update_date_time = models.DateTimeField(auto_now=True)
+    create_date_time = models.DateTimeField()
+    update_date_time = models.DateTimeField()
     
     def __unicode__(self):
         return self.subject
