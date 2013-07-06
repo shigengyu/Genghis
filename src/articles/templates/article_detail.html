@@ -93,7 +93,7 @@
 					{% for comment in article.articlecomment_set.all %}
 						<span id="comment-{{comment.id}}">
 							{{ comment.content|linebreaksbr }}
-							-- <i>{{ comment.author.get_full_name }}</i> on <span class="datetime">{{ comment.update_date_time }}</span>
+							-- <i>{{ comment.author.get_full_name }}</i> on <span class="">{{ comment.update_date_time }}</span>
 						</span>
 						<span id="comment-actions-{{comment.id}}" class="pull-right">
 							{% if article.author == request.user %}
