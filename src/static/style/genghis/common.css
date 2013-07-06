@@ -1,3 +1,7 @@
 .datetime {
 	visibility: hidden;
 }
+
+.no-padding {
+	padding: 0;
+}
