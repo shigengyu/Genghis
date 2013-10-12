@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.python.pydev.django.launching.DjangoLaunchConfigurationType">
+<stringAttribute key="bad_container_name" value="\genghis\launch"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/genghis/src/manage.py"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<mapAttribute key="org.eclipse.debug.core.environmentVariables">
+<mapEntry key="EMAIL_PASSWORD" value="Univer@ms0"/>
+<mapEntry key="GENGHIS_DATABASE_PASSWORD" value="steroids"/>
+<mapEntry key="GENGHIS_FACEBOOK_API_SECRET" value="c3444c0aee28b1621934f65ce4d83ee3"/>
+<mapEntry key="GENGHIS_FACEBOOK_APP_ID" value="592973724070224"/>
+<mapEntry key="GENGHIS_FLICKR_API_SECRET" value="9a1c2a78626eda96"/>
+<mapEntry key="GENGHIS_FLICKR_APP_ID" value="3df70aba9a842de5341b02d611d11ab9"/>
+<mapEntry key="GENGHIS_GOOGLE_CONSUMER_KEY" value="443446738252.apps.googleusercontent.com"/>
+<mapEntry key="GENGHIS_GOOGLE_CONSUMER_SECRET" value="E1a_5-H_izUFq7O3BZ4jA7Ae"/>
+<mapEntry key="GENGHIS_LINKEDIN_CONSUMER_KEY" value="r4nwqges9hsj"/>
+<mapEntry key="GENGHIS_LINKEDIN_CONSUMER_SECRET" value="rXpDiwOJVQYdrkjf"/>
+<mapEntry key="GENGHIS_SECRET_KEY" value="16tw1uct3-*sld%8mmlf(ku67+k2(r*k@=b-e+wm6m#+sf-4cb"/>
+</mapAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:genghis}/${DJANGO_MANAGE_LOCATION}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_OTHER_WORKING_DIRECTORY" value="${workspace_loc:}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="shell"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:}"/>
+<stringAttribute key="org.python.pydev.debug.ATTR_INTERPRETER" value="__default"/>
+<stringAttribute key="org.python.pydev.debug.ATTR_PROJECT" value="genghis"/>
+<intAttribute key="org.python.pydev.debug.ATTR_RESOURCE_TYPE" value="4"/>
+</launchConfiguration>
