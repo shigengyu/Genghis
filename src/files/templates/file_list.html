@@ -22,7 +22,9 @@
 		<div class="widget-content referrer">
 			<table id="tags" class="table table-bordered">
 				<tr>
+					{% if is_admin %}
 					<th class="span1"><center>ID</center></th>
+					{% endif %}
 					<th class="span2">Name</th>
 					<th class="span3">Description</th>
 					<th class="span1">Upload By</th>
@@ -31,7 +33,9 @@
 				</tr>
 				{% for file in files %}
 				<tr>
+					{% if is_admin %}
 					<td>{{ file.id }}</td>
+					{% endif %}
 					<td>{{ file.name }}</td>
 					<td>{{ file.description }}</td>
 					<td>{{ file.uploaded_by.get_full_name }}</td>

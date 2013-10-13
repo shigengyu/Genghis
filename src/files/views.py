@@ -13,7 +13,7 @@ class FileList(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(FileList, self).get_context_data(**kwargs)
-        context['files'] = File.objects.order_by('id').select_related()
+        context['files'] = File.objects.order_by('name').select_related()
         context['path'] = (PathItem('/files', 'Files'),)
         return context
 
