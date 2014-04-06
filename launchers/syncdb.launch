@@ -7,9 +7,10 @@
 <listEntry value="1"/>
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-<mapEntry key="GENGHIS_DATABASE_HOST" value="sql3.freesqldatabase.com"/>
-<mapEntry key="GENGHIS_DATABASE_NAME" value="sql335669"/>
-<mapEntry key="GENGHIS_DATABASE_USER" value="sql335669"/>
+<mapEntry key="GENGHIS_DATABASE_HOST" value="shigengyu.com"/>
+<mapEntry key="GENGHIS_DATABASE_NAME" value="shigengy_genghis_test"/>
+<mapEntry key="GENGHIS_DATABASE_PASSWORD" value="${password_prompt:Genghis Test Database Password}"/>
+<mapEntry key="GENGHIS_DATABASE_USER" value="shigengy_test"/>
 <mapEntry key="GENGHIS_FACEBOOK_API_SECRET" value="c3444c0aee28b1621934f65ce4d83ee3"/>
 <mapEntry key="GENGHIS_FACEBOOK_APP_ID" value="592973724070224"/>
 <mapEntry key="GENGHIS_FLICKR_API_SECRET" value="9a1c2a78626eda96"/>

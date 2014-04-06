@@ -22,9 +22,9 @@ DATABASES = {
         'NAME': os.environ.get('GENGHIS_DATABASE_NAME', ''),  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': os.environ.get('GENGHIS_DATABASE_USER', ''),
-        'PASSWORD': os.environ.get('GENGHIS_DATABASE_PASSWORD', 'hG9*nZ5*'),
-        'HOST': 'sql3.freesqldatabase.com',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '3306',  # Set to empty string for default.
+        'PASSWORD': os.environ.get('GENGHIS_DATABASE_PASSWORD', ''),
+        'HOST': os.environ.get('GENGHIS_DATABASE_HOST', ''),  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': os.environ.get('GENGHIS_DATABASE_PORT', '3306'),  # Set to empty string for default.
     }
 }
 
