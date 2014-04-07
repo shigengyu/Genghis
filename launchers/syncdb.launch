@@ -7,15 +7,15 @@
 <listEntry value="1"/>
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-<mapEntry key="GENGHIS_DATABASE_HOST" value="shigengyu.com"/>
-<mapEntry key="GENGHIS_DATABASE_NAME" value="shigengy_genghis_test"/>
+<mapEntry key="GENGHIS_DATABASE_HOST" value="localhost"/>
+<mapEntry key="GENGHIS_DATABASE_NAME" value="genghis"/>
+<mapEntry key="GENGHIS_DATABASE_USER" value="univer"/>
 <mapEntry key="GENGHIS_DATABASE_PASSWORD" value="${password_prompt:Genghis Test Database Password}"/>
-<mapEntry key="GENGHIS_DATABASE_USER" value="shigengy_test"/>
 <mapEntry key="GENGHIS_FACEBOOK_API_SECRET" value="c3444c0aee28b1621934f65ce4d83ee3"/>
 <mapEntry key="GENGHIS_FACEBOOK_APP_ID" value="592973724070224"/>
 <mapEntry key="GENGHIS_FLICKR_API_SECRET" value="9a1c2a78626eda96"/>
 <mapEntry key="GENGHIS_FLICKR_APP_ID" value="3df70aba9a842de5341b02d611d11ab9"/>
-<mapEntry key="GENGHIS_GOOGLE_CONSUMER_KEY" value="443446738252.apps.googleusercontent.com"/>
+<mapEntry key="GENGHIS_GOOGLE_CONSUMER_KEY" value="443446738252.apps.googleusercontent.com"/>d
 <mapEntry key="GENGHIS_GOOGLE_CONSUMER_SECRET" value="E1a_5-H_izUFq7O3BZ4jA7Ae"/>
 <mapEntry key="GENGHIS_LINKEDIN_CONSUMER_KEY" value="r4nwqges9hsj"/>
 <mapEntry key="GENGHIS_LINKEDIN_CONSUMER_SECRET" value="rXpDiwOJVQYdrkjf"/>

@@ -8,9 +8,9 @@
 <listEntry value="1"/>
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-<mapEntry key="GENGHIS_DATABASE_HOST" value="shigengyu.com"/>
-<mapEntry key="GENGHIS_DATABASE_NAME" value="shigengy_genghis_test"/>
-<mapEntry key="GENGHIS_DATABASE_USER" value="shigengy_test"/>
+<mapEntry key="GENGHIS_DATABASE_HOST" value="localhost"/>
+<mapEntry key="GENGHIS_DATABASE_NAME" value="genghis"/>
+<mapEntry key="GENGHIS_DATABASE_USER" value="univer"/>
 <mapEntry key="GENGHIS_DATABASE_PASSWORD" value="${password_prompt:Genghis Test Database Password}"/>
 <mapEntry key="GENGHIS_DEBUG" value="True"/>
 <mapEntry key="GENGHIS_FACEBOOK_API_SECRET" value="c3444c0aee28b1621934f65ce4d83ee3"/>
