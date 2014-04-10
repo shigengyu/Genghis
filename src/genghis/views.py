@@ -10,4 +10,4 @@ class MySqlRedirectView(RedirectView):
 
 class WordPressRedirectView(RedirectView):
     def get_redirect_url(self, **kwargs):
-        return '/wp'
+        return '/wp/index.php'
