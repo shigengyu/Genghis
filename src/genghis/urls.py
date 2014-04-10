@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, include, url, static
 from django.conf import settings
-from genghis.views import WikiRedirectView, MySqlRedirectView
-#from django.contrib import admin
-#admin.autodiscover()
+from genghis.views import WikiRedirectView, MySqlRedirectView, WordPressRedirectView
 
 urlpatterns = patterns('',
     url(r'^$', include('home.urls')),
@@ -15,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^socialauth/', include('social_auth.urls')),
     url(r'^wiki/', WikiRedirectView.as_view()),
     url(r'^mysql/', MySqlRedirectView.as_view()),
+    url(r'^wp/', WordPressRedirectView.as_view()),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
