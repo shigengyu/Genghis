@@ -12,8 +12,8 @@ urlpatterns = patterns('',
     url(r'^profile/', include('about.urls')),
     url(r'^socialauth/', include('social_auth.urls')),
     url(r'^wiki/', WikiRedirectView.as_view()),
+    url(r'^wp/', WordPressRedirectView.as_view()),
     url(r'^mysql/', MySqlRedirectView.as_view()),
-    url(r'^wordpress/', WordPressRedirectView.as_view()),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
