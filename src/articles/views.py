@@ -24,6 +24,12 @@ class ArticleList(TemplateView):
         if not self.request.user.is_authenticated() or not is_admin(self.request.user):
             articles = articles.filter(is_draft=False)
         articles = articles.order_by('-create_date_time').select_related()
+        
+        '''
+        TODO:
+            Read articles from wordpress database and create article objects
+        '''
+        
         context['articles'] = articles
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
