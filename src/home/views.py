@@ -4,7 +4,7 @@ from home.models import PathItem
 from home.authentication import is_admin
 from articles.models import Article
 from photos.models import Photo
-import wordpress
+from articles import wordpress
 
 class HomeView(TemplateView):
     template_name = 'index.html'
