@@ -32,10 +32,7 @@
 					<div class="widget-content">
 						<div class="padd">
 							{% for article in articles %}
-							<a href="/articles/detail/{{article.id}}">
-								{% if article.is_draft %}
-									[Draft]
-								{% endif %}
+							<a href="/wp/?p={{article.id}}">
 								{{ article.subject }}
 							</a>
 							

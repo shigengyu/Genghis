@@ -12,6 +12,7 @@ from articles.models import Article, ArticleTag, ArticleComment
 from articles.forms import ArticleForm, ArticleTagForm, ArticleCommentForm
 from home.models import PathItem
 from home.authentication import require_login, require_admin, is_admin
+import wordpress
 
 ARTICLE_PATH_ITEM = PathItem('/articles', 'Article')
 
@@ -30,7 +31,7 @@ class ArticleList(TemplateView):
             Read articles from wordpress database and create article objects
         '''
         
-        context['articles'] = articles
+        context['articles'] = wordpress.fetch_articles()
         context['path'] = (ARTICLE_PATH_ITEM,)
         context['tags'] = ArticleTag.objects
         return context
