@@ -21,13 +21,15 @@ class ArticleList(TemplateView):
   
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
+        
+        '''
         articles = Article.objects
         if not self.request.user.is_authenticated() or not is_admin(self.request.user):
             articles = articles.filter(is_draft=False)
         articles = articles.order_by('-create_date_time').select_related()
+        '''
         
         '''
-        TODO:
             Read articles from wordpress database and create article objects
         '''
         
