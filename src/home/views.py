@@ -4,6 +4,7 @@ from home.models import PathItem
 from home.authentication import is_admin
 from articles.models import Article
 from photos.models import Photo
+import wordpress
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -11,11 +12,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['is_admin'] = is_admin(self.request.user)
-        articles = Article.objects.order_by("-create_date_time")
-        if not self.request.user.is_authenticated() or not is_admin(self.request.user):
-            articles = articles.filter(is_draft=False)
-        articles = articles[0:10]
-        context['articles'] = articles.select_related()
+        articles = wordpress.fetch_articles()
+        context['articles'] = articles
         context['photos'] = Photo.objects.filter(display_in_gallery=True).order_by('-date')[0:8].select_related()
         return context
 
