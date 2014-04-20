@@ -229,6 +229,9 @@ class ArticleTagDelete(DeleteView):
     def delete(self, request, *args, **kwargs):
         return super(ArticleTagDelete, self).delete(request)
 
+class ArticlesRedirectView(RedirectView):
+    def get_redirect_url(self, **kwargs):
+        return '/wp/index.php'
 
 def get_article_comment(request, *args, **kwargs):
     

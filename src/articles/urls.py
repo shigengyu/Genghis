@@ -1,13 +1,13 @@
 from django.conf.urls import patterns, url
 from articles.views import ArticleList, ArticleListByTag, ArticleDetail, \
     ArticleCreate, ArticleUpdate, ArticleDelete
-from articles.views import ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete, \
+from articles.views import ArticleRedirectView, ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete, \
     get_article_comment, create_article_comment, update_article_comment, delete_article_comment
 
 
 
 urlpatterns = patterns('',
-    url(r'^$', ArticleList.as_view()),
+    url(r'^$', ArticlesRedirectView.as_view()),
     url(r'^bytag/(?P<slug>[-\w]+)/$', ArticleListByTag.as_view()),
     url(r'^detail/(?P<pk>\d+)/$', ArticleDetail.as_view()),
     url(r'^create/$', ArticleCreate.as_view()),
