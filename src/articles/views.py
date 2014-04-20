@@ -2,7 +2,7 @@ from datetime import datetime
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect, HttpResponse, \
     HttpResponseNotFound, HttpResponseForbidden
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
@@ -231,7 +231,7 @@ class ArticleTagDelete(DeleteView):
 
 class ArticlesRedirectView(RedirectView):
     def get_redirect_url(self, **kwargs):
-        return '/wp/index.php'
+        return '/wp'
 
 def get_article_comment(request, *args, **kwargs):
     

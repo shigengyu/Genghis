@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from articles.views import ArticleList, ArticleListByTag, ArticleDetail, \
     ArticleCreate, ArticleUpdate, ArticleDelete
-from articles.views import ArticleRedirectView, ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete, \
+from articles.views import ArticlesRedirectView, ArticleTagList, ArticleTagCreate, ArticleTagUpdate, ArticleTagDelete, \
     get_article_comment, create_article_comment, update_article_comment, delete_article_comment
 
 
